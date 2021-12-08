@@ -8,4 +8,4 @@ $mysql = new mysqli('localhost','root','','passes');
 host - "localhost"
 user - "root"
 password - ""
-database - "passes"
+database - "pass_system"
