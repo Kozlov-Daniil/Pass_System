@@ -4,3 +4,13 @@
 3) Прописывается команда запуска бота "python bot2.py"
 4) После чего можно приступать к работе с ботом в telegram
 
+
+Данные используемые при подключении к БД:
+db = mysql.connector.connect(
+	host="localhost",
+	user="root",
+	passwd="",
+	port="3306",
+	database="pass_system"
+)
+
