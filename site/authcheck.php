@@ -2,7 +2,7 @@
     $phone_number = filter_var(trim($_POST['phone_number']), FILTER_SANITIZE_STRING);
     $id_user = filter_var(trim($_POST['id_user']), FILTER_SANITIZE_STRING);
 
-    $mysql = new mysqli('localhost','root','','passes');
+    $mysql = new mysqli('localhost','root','','pass_system');
     
     $result = $mysql->query("SELECT * FROM `users` WHERE `phone_number`='$phone_number' AND `id_user`='$id_user'");
     $user = $result->fetch_assoc();
