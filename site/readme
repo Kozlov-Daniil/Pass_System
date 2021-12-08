@@ -1,1 +1,11 @@
+Запуск сайта осуществлялся следующим образом:
+1) Запускается MySql и Apache
+2) Переходим в админ панель Apache и наблюдаем за результатом выполнения кода.
 
+Подключение к БД
+$mysql = new mysqli('localhost','root','','passes');
+
+host - "localhost"
+user - "root"
+password - ""
+database - "passes"
