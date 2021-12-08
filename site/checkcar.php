@@ -8,7 +8,7 @@
     $comment = filter_var(trim($_POST['comment']), FILTER_SANITIZE_STRING);
 
 
-    $mysql = new mysqli('localhost','root','','passes');
+    $mysql = new mysqli('localhost','root','','pass_system');
 
     $mysql->query("INSERT INTO `reg_car` (`num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_number`, `comment`) VALUES ('$num_car', '$add_info', '$data_time', '$address', '$full_name', '$phone_number', '$comment')");
 
