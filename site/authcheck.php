@@ -1,10 +1,11 @@
+
 <?php
     $phone_number = filter_var(trim($_POST['phone_number']), FILTER_SANITIZE_STRING);
-    $id_user = filter_var(trim($_POST['id_user']), FILTER_SANITIZE_STRING);
+    $user_id = filter_var(trim($_POST['user_id']), FILTER_SANITIZE_STRING);
 
     $mysql = new mysqli('localhost','root','','pass_system');
     
-    $result = $mysql->query("SELECT * FROM `users` WHERE `phone_number`='$phone_number' AND `id_user`='$id_user'");
+    $result = $mysql->query("SELECT * FROM `users` WHERE `phone_number`='$phone_number' AND `user_id`='$user_id'");
     $user = $result->fetch_assoc();
     if(count($user) == 0){
         echo "Такой пользователь не найден";
@@ -15,6 +16,6 @@
 
     $mysql->close();
 
-    header('Location: /Passes');
+    header('Location: index.php');
     
 ?>
