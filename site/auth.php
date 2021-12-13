@@ -18,7 +18,7 @@
         <input type="password" class="form-control" name="id_user" id="id_user" placeholder="Введите пароль"><br>
         <div style="text-align:center;">
             <button class="btn btn-secondary" type="submit">Отмена</button>
-            <button class="btn btn-success" type="submit">Зарегистрироваться</button>
+            <button class="btn btn-success" type="submit">Войти</button>
         </div>
     </form>
 </div>
