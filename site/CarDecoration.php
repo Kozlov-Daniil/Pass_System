@@ -29,8 +29,8 @@
             <label for="full_name">Ваше ФИО*</label>
             <input type="text" class="form-control" name="full_name" id="full_name"><br>
 
-            <label for="phone_number">Ваш телефон*</label>
-            <input type="text" class="form-control" name="phone_number" id="phone_number"><br>
+            <label for="phone_numbers">Ваш телефон*</label>
+            <input type="text" class="form-control" name="phone_numbers" id="phone_numbers"><br>
 
             <label for="comment">Комментарий</label>
             <input type="text" class="form-control" name="comment" id="comment"><br>
