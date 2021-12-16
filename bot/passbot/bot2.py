@@ -3,6 +3,7 @@ import configure
 import mysql.connector
 from telebot import types
 
+
 bot = telebot.TeleBot(configure.config['token'])
 
 db = mysql.connector.connect(
@@ -45,28 +46,23 @@ class Car:
 		self.comment = ''
 
 
-
-@bot.message_handler(commands=['start'])
-def start (message):
-
-	markup_inline = types.InlineKeyboardMarkup()
-	item_1 = types.InlineKeyboardButton(text = 'Регистрация', callback_data = '1')
-	item_2 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '2')
-	item_3 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '3')
-
-	markup_inline.add(item_1, item_2, item_3)
-	bot.send_message(message.chat.id, 'Для подачи заявки вам необходимо зарегистрироваться.',
-	reply_markup = markup_inline
-	)
-@bot.callback_query_handler(func = lambda call: True)
-def answer(call):
-	if call.data == '1':
-		msg = bot.send_message(call.message.chat.id, "Введите ФИО")
-		bot.register_next_step_handler(msg, process_name_step)
-	elif call.data == '2':
-		msg = bot.send_message(call.message.chat.id, "В разработке...")
+@bot.message_handler(commands=['start'])			
+def start(message):
+	people_id = message.chat.id 
+	cursor.execute(f"SELECT user_id FROM users WHERE user_id = {people_id}")
+	data = cursor.fetchone()
+	if data is None:
+			msg = bot.send_message(message.chat.id, "Введите ФИО")
+			bot.register_next_step_handler(msg, process_name_step)
 	else:
-		msg = bot.send_message(call.message.chat.id, "Ссылка на сайт:")
+		markup_inline = types.InlineKeyboardMarkup()
+		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+
+		markup_inline.add(item_1, item_2)
+		bot.send_message(message.chat.id, 'Меню',
+		reply_markup = markup_inline
+		)
 def process_name_step(message):
 	try:
 		user_id = message.from_user.id
@@ -103,24 +99,27 @@ def process_lotnumber_step(message):
 
 		bot.send_message(message.chat.id, "Регистрация завершена")
 		
+			
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка или вы уже зарегистрированы')
 
 	markup_inline = types.InlineKeyboardMarkup()
-	item_1 = types.InlineKeyboardButton(text = 'Регистрация', callback_data = '1')
-	item_2 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '2')
-	item_3 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '3')
+	item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+	item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
 
-	markup_inline.add(item_1, item_2, item_3)
+	markup_inline.add(item_1, item_2)
 	bot.send_message(message.chat.id, 'Меню',
 	reply_markup = markup_inline
 	)
 
 
-
 bot.enable_save_next_step_handlers(delay=2)
 
 bot.load_next_step_handlers()
+
+
+
+bot.polling(none_stop = True, interval = 0)
 
 
 
