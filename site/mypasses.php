@@ -1,3 +1,4 @@
+<?php error_reporting(0); ?>
 <!Doctype html>
 <html>
  <head>
@@ -33,8 +34,8 @@
                         <td><?= $userpass[2]?> </td>
                         <td><?= $userpass[4]?> </td>
                         <td>
-                            <img class="" src="img/edit.png" alt="" >
-                            <img class="" src="img/trash.png" alt="">
+                            <a href="update.php?id=<?$userpass[0]?>"><img class="" src="img/edit.png" alt="" ></a>
+                            <a href="delete.php?id=<?$userpass[0]?>"><img class="" src="img/trash.png" alt=""></a>
                         </td>
                     </tr>
 
