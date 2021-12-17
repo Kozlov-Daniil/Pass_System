@@ -15,8 +15,10 @@
     <div class="container mt-4">
         <?php
             if($_COOKIE['user'] == 'Охрана'):
+                
         ?>
-        <h4 class="mb-4">Список пропусков</h4>
+        <?php header('Location: Security.php'); ?>
+        <!-- <h4 class="mb-4">Список пропусков</h4>
             <table class="table table-hover">
             <thead>
             <tr>
@@ -46,7 +48,7 @@
                 <td>john@example.com</td>
             </tr>
             </tbody>
-        </table>
+        </table> -->
 
         <p><a href="exit.php">Выйти</a></p>
 

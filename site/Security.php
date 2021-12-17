@@ -9,48 +9,55 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <?php require "blocks/header.php"?>
+<div class="container" >
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="exit.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+       Назад
+      </a>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Список пропусков</a></li>
+      </ul>
+      <div class="col-md-3 text-end">
+      <button type="button" class="btn btn-outline-success me-2">Оформить заявку</button>
+      </div>
+    </header>
+  </div>
+    <!-- <div style="width:100%; background-color:#707070; padding: 20px 0px 20px 0px; color:">
+        <h4 class="mb-4" style="text-align:center;">Список пропусков</h4>
+    </div> -->
     <div class="container mt-4">
-        <h4 class="mb-4">Подайте свою заявку для въезда</h4>
-        <div class="d-flex flex-wrap">
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Гостевое авто</h4>
-                </div>
-                <div class="card-body">
-                    <img src="img/1.png" alt="">
-                    <ul class="list-unstyled mt-3 mb-4">
-                    <li>Подача заявки на гостевой пропуск для авто</li>
-                    </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Оформить заявку</button>
-                </div>
-            </div>
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Такси</h4>
-                </div>
-                <div class="card-body">
-                    <img src="img/2.png" alt="">
-                    <ul class="list-unstyled mt-3 mb-4">
-                    <li>Подача заявки на пропуск такси</li>
-                    </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Оформить заявку</button>
-                </div>
-            </div>
-            <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal">Служебное авто</h4>
-                </div>
-                <div class="card-body">
-                    <img src="img/3.png" alt="">
-                    <ul class="list-unstyled mt-3 mb-4">
-                    <li>Подача заявки на служебные авто</li>
-                    </ul>
-                    <button type="button" class="w-100 btn btn-lg btn-outline-primary">Оформить заявку</button>
-                </div>
-            </div>
-        </div>
+    <table class="table">
+        <thead class="thead-light">    
+            <tr>
+                <th>id</th>
+                <th>Автомобиль</th>
+                <th>Адрес и заявитель</th>
+                <th>Ожидаемая дата</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>   
+            <?php
+                $mysql = new mysqli('localhost','root','','pass_system');
+                
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car`"); 
+                $userpass = mysqli_fetch_all($userpass);
+                foreach ($userpass as $userpass){
+                    ?>
+                    <tr>        
+                        <td><?= $userpass[0]?> </td>
+                        <td><?= $userpass[3]?><br><?= $userpass[2]?>  </td>
+                        <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
+                        <td><?= $userpass[4]?></td>
+                        <td></td>
+                    </tr>
+
+                    <?php
+                }
+            ?>
+        </tbody>    
+        </table>
     </div>
-    <?php require "blocks/footer.php" ?>
+
 </body>
 </html>
