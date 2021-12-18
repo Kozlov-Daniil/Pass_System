@@ -14,44 +14,11 @@
     <?php require "header.php"?>
     <div class="container mt-4">
         <?php
-            if($_COOKIE['user'] == 'Охрана'):
-                
+            if($_COOKIE['user'] == 'Охрана'):      
         ?>
+
         <?php header('Location: Security.php'); ?>
-        <!-- <h4 class="mb-4">Список пропусков</h4>
-            <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Статус</th>
-                <th>Автомобиль</th>
-                <th>Ожидаемая дата</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-                <td>john@example.com</td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-                <td>john@example.com</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-                <td>john@example.com</td>
-            </tr>
-            </tbody>
-        </table> -->
-
         <p><a href="exit.php">Выйти</a></p>
-
 
             <?php else: ?>
                 <h4 class="mb-5" style="text-align:center;">Подайте свою заявку для въезда</h4>

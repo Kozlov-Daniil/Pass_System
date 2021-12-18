@@ -27,15 +27,18 @@
                 
                 $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car`"); 
                 $userpass = mysqli_fetch_all($userpass);
-                foreach ($userpass as $userpass){
+
+                
+
+                foreach ($userpass as $pass){
                     ?>
                     <tr>        
-                        <td><?= $userpass[0]?> </td>
-                        <td><?= $userpass[2]?> </td>
-                        <td><?= $userpass[4]?> </td>
+                        <td><?= $pass[0]?> </td>
+                        <td><?= $pass[2]?> </td>
+                        <td><?= $pass[4]?> </td>
                         <td>
-                            <a href="update.php?id=<?$userpass[0]?>"><img class="" src="img/edit.png" alt="" ></a>
-                            <a href="delete.php?id=<?$userpass[0]?>"><img class="" src="img/trash.png" alt=""></a>
+                            <a href="update.php?id=<?=$pass[0]?>"><img class="" src="img/edit.png" alt="" ></a>
+                            <a href="delete.php?id=<?=$pass[0]?>"><img class="" src="img/trash.png" alt=""></a>
                         </td>
                     </tr>
 

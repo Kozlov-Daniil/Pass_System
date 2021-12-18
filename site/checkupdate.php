@@ -6,17 +6,14 @@
     $full_name = filter_var(trim($_POST['full_name']), FILTER_SANITIZE_STRING);
     $phone_numbers = filter_var(trim($_POST['phone_numbers']), FILTER_SANITIZE_STRING);
     $comment = filter_var(trim($_POST['comment']), FILTER_SANITIZE_STRING);
-    $id_user = filter_var(trim($_POST['id_user']), FILTER_SANITIZE_STRING);
-
-
+    $id = filter_var(trim($_POST['id']), FILTER_SANITIZE_STRING);
+ 
 
     $mysql = new mysqli('localhost','root','','pass_system');
 
-    $mysql->query("INSERT INTO `reg_car` (`id_user`, `num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_numbers`, `comment`) VALUES ( '$id_user','$num_car', '$add_info', '$data_time', '$address', '$full_name', '$phone_numbers', '$comment')");
 
+    mysqli_query($mysql, "UPDATE `reg_car` SET `num_car` = '$num_car', `add_info` = '$add_info', `data_time` = ' $data_time', `address` = '$address', `full_name` = '$full_name', `phone_numbers` = '$phone_numbers', `comment` = ' $comment' WHERE `reg_car`.`id` = '$id'");
+    
+    header('Location: mypasses.php')
 
-    $mysql->close();
-
-    header('Location: index.php');
 ?>
-

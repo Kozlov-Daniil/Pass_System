@@ -1,14 +1,11 @@
-
 <?php
     $mysql = new mysqli('localhost','root','','pass_system');
 
     $userpass_id = $_GET['id'];
     $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `id` = '$userpass_id'");
     $userpass = mysqli_fetch_assoc($userpass);
-    print_r($userpass);
-    print_r($_GET);
-?>
 
+?>
 <!Doctype html>
 <html>
  <head>
@@ -23,27 +20,30 @@
     <?php require "header.php" ?>
     <div class="container mt-4">
         <h3 style="text-align:center;">Заполнение основной инофрмации</h3><br>
-        <form action="checkcar.php" method="post" style="margin: 0 auto;" >
+        <form action="checkupdate.php" method="post" style="margin: 0 auto;" >
+
+            <input type="hidden" class="form-control" name="id" value="<?= $userpass['id'] ?>">
+
             <label for="num_car">Гос. номер авто*</label>
-            <input type="text" class="form-control" name="num_car" id="num_car"><br>
+            <input type="text" class="form-control" name="num_car" id="num_car" value="<?= $userpass['num_car'] ?>"><br>
 
             <label for="add_info">Дополнительная информация</label>
-            <input type="text" class="form-control" name="add_info" id="add_info"><br>
+            <input type="text" class="form-control" name="add_info" id="add_info" value="<?= $userpass['add_info'] ?>"><br>
 
             <label for="data_time">Ожидаемая дата и время*</label>
-            <input type="datetime-local" class="form-control" name="data_time" id="data_time"><br>
+            <input type="datetime-local" class="form-control" name="data_time" id="data_time" value="<?= $userpass['data_time'] ?>"><br>
 
             <label for="address">Адрес назначения*</label>
-            <input type="text" class="form-control" name="address" id="address"><br>
+            <input type="text" class="form-control" name="address" id="address" value="<?= $userpass['address'] ?>"><br>
 
             <label for="full_name">Ваше ФИО*</label>
-            <input type="text" class="form-control" name="full_name" id="full_name"><br>
+            <input type="text" class="form-control" name="full_name" id="full_name" value="<?= $userpass['full_name'] ?>"><br>
 
             <label for="phone_numbers">Ваш телефон*</label>
-            <input type="text" class="form-control" name="phone_numbers" id="phone_numbers"><br>
+            <input type="text" class="form-control" name="phone_numbers" id="phone_numbers" value="<?= $userpass['phone_numbers'] ?>"><br>
 
             <label for="comment">Комментарий</label>
-            <input type="text" class="form-control" name="comment" id="comment"><br>
+            <input type="text" class="form-control" name="comment" id="comment" value="<?= $userpass['comment'] ?>"><br>
 
             <button class="btn btn-secondary">Отмена</button>
             <button class="btn btn-success" type="submit">Обновить</button>

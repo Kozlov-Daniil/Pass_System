@@ -17,7 +17,7 @@
         <input type="text" class="form-control" name="name" id="name" placeholder="Введите Имя"><br>
         <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Введите телефон"><br>
         <input type="text" class="form-control" name="lot_number" id="lot_number" placeholder="Введите номер участка"><br>
-        <input type="password" class="form-control" name="user_id" id="user_id" placeholder="Введите ваш id телеграмма"><br>
+        <input type="password" class="form-control" name="id_telegramm" id="id_telegramm" placeholder="Введите ваш id телеграмма"><br>
         <div style="text-align:center;">
             <button class="btn btn-secondary" type="submit">Отмена</button>
             <button class="btn btn-success" type="submit">Зарегистрироваться</button>

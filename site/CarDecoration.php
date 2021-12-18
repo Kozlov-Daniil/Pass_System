@@ -1,4 +1,8 @@
-<?php error_reporting(0); ?>
+<?php 
+    error_reporting(0);
+     
+
+?>
 <!Doctype html>
 <html>
  <head>
@@ -14,6 +18,9 @@
     <div class="container mt-4">
         <h3 style="text-align:center;">Заполнение основной инофрмации</h3><br>
         <form action="checkcar.php" method="post" style="margin: 0 auto;" >
+
+            <input type="hidden" class="form-control" name="id_user" value="">
+
             <label for="num_car">Гос. номер авто*</label>
             <input type="text" class="form-control" name="num_car" id="num_car"><br>
 
