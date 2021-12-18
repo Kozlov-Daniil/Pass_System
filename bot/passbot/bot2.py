@@ -123,4 +123,4 @@ bot.polling(none_stop = True, interval = 0)
 
 
 
-bot.polling(none_stop = True, interval = 0)
+
