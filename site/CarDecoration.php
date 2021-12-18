@@ -1,6 +1,6 @@
 <?php 
     error_reporting(0);
-     
+
 
 ?>
 <!Doctype html>
@@ -19,7 +19,7 @@
         <h3 style="text-align:center;">Заполнение основной инофрмации</h3><br>
         <form action="checkcar.php" method="post" style="margin: 0 auto;" >
 
-            <input type="hidden" class="form-control" name="id_user" value="">
+            <input type="hidden" class="form-control" name="id_user" value="<?php echo $_COOKIE['id_user']; ?>">
 
             <label for="num_car">Гос. номер авто*</label>
             <input type="text" class="form-control" name="num_car" id="num_car"><br>

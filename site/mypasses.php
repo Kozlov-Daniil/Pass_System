@@ -1,4 +1,4 @@
-<?php error_reporting(0); ?>
+<?php  ?>
 <!Doctype html>
 <html>
  <head>
@@ -24,11 +24,9 @@
         <tbody>   
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
-                
-                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car`"); 
+                $id_user = $_COOKIE['id_user'];
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `id_user` = $id_user"); 
                 $userpass = mysqli_fetch_all($userpass);
-
-                
 
                 foreach ($userpass as $pass){
                     ?>
@@ -51,3 +49,4 @@
     <?php require "footer.php" ?>
 </body>
 </html>
+
