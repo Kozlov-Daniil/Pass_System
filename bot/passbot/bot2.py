@@ -77,12 +77,15 @@ def process_phonenumber_step(message):
 	try:
 		user_id = message.from_user.id
 		user= user_data[user_id]
-		user.phonenumber = message.text
-
-		msg = bot.send_message(message.chat.id, "Введите номер участка")
-		bot.register_next_step_handler(msg, process_lotnumber_step)
+		if message.text.isnumeric():
+			user.phonenumber = message.text 
+			msg = bot.send_message(message.chat.id, "Введите номер участка")
+			bot.register_next_step_handler(msg, process_lotnumber_step)
+		else:
+			msg = bot.send_message(message.chat.id, "Ошибка ввода")
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка')
+			
 
 def process_lotnumber_step(message):
 	try:
@@ -120,7 +123,5 @@ bot.load_next_step_handlers()
 
 
 bot.polling(none_stop = True, interval = 0)
-
-
 
 
