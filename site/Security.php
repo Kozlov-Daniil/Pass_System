@@ -49,7 +49,10 @@
                         <td><?= $userpass[3]?><br><?= $userpass[2]?>  </td>
                         <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td><?= $userpass[4]?></td>
-                        <td></td>
+                        <td>
+                            <button type="button" class="btn btn-success style">Машина приехала</button><br><br>
+                            <button type="button" class="btn btn-secondary">Отменить заявку</button>
+                        </td>
                     </tr>
 
                     <?php

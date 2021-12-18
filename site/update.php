@@ -3,12 +3,13 @@
     $mysql = new mysqli('localhost','root','','pass_system');
 
     $userpass_id = $_GET['id'];
-    $userpass = mysqli_query($mysql, query:"SELECT * FROM `reg_car` WHERE `id` = '$userpass_id'");
+    $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `id` = '$userpass_id'");
     $userpass = mysqli_fetch_assoc($userpass);
     print_r($userpass);
+    print_r($_GET);
 ?>
 
-<!-- <!Doctype html>
+<!Doctype html>
 <html>
  <head>
     <meta charset="UTF-8">
@@ -50,4 +51,4 @@
     </div>
     <?php require "footer.php" ?>
 </body>
-</html>   -->
+</html>
