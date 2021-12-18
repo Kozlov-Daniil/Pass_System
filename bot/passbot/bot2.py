@@ -83,6 +83,8 @@ def process_phonenumber_step(message):
 			bot.register_next_step_handler(msg, process_lotnumber_step)
 		else:
 			msg = bot.send_message(message.chat.id, "Ошибка ввода")
+			bot.send_message(message.chat.id, 'Повторите попытку (вводите только цифры)')
+			bot.register_next_step_handler(msg, process_phonenumber_step)
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка')
 			
