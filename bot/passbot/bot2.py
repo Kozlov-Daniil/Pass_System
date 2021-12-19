@@ -49,7 +49,7 @@ class Car:
 @bot.message_handler(commands=['start'])			
 def start(message):
 	people_id = message.chat.id 
-	cursor.execute(f"SELECT user_id FROM users WHERE user_id = {people_id}")
+	cursor.execute(f"SELECT id_telegramm FROM users WHERE id_telegramm = {people_id}")
 	data = cursor.fetchone()
 	if data is None:
 			msg = bot.send_message(message.chat.id, "Введите ФИО")
@@ -65,8 +65,8 @@ def start(message):
 		)
 def process_name_step(message):
 	try:
-		user_id = message.from_user.id
-		user_data[user_id] = User(message.text)
+		id_telegramm = message.from_user.id
+		user_data[id_telegramm] = User(message.text)
 
 		msg = bot.send_message(message.chat.id, "Введите номер телефона")
 		bot.register_next_step_handler(msg, process_phonenumber_step)
@@ -75,8 +75,8 @@ def process_name_step(message):
 
 def process_phonenumber_step(message):
 	try:
-		user_id = message.from_user.id
-		user= user_data[user_id]
+		id_telegramm = message.from_user.id
+		user= user_data[id_telegramm]
 		if message.text.isnumeric():
 			user.phonenumber = message.text 
 			msg = bot.send_message(message.chat.id, "Введите номер участка")
@@ -91,12 +91,12 @@ def process_phonenumber_step(message):
 
 def process_lotnumber_step(message):
 	try:
-		user_id = message.from_user.id
-		user = user_data[user_id]
+		id_telegramm = message.from_user.id
+		user = user_data[id_telegramm]
 		user.lotnumber = message.text
 
-		sql = "INSERT INTO users (name, phone_number, lot_number, user_id) VALUES (%s, %s, %s, %s)"
-		val = (user.name, user.phonenumber, user.lotnumber, user_id)
+		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm) VALUES (%s, %s, %s, %s)"
+		val = (user.name, user.phonenumber, user.lotnumber, id_telegramm)
 		cursor.execute(sql, val)
 		db.commit()
 
@@ -125,5 +125,4 @@ bot.load_next_step_handlers()
 
 
 bot.polling(none_stop = True, interval = 0)
-
 
