@@ -23,9 +23,9 @@
     </header>
     
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 nav-tabs">
-    <li><a href="Security.php" class="nav-link px-2 link-active">Новые заявки</a></li>
+    <li><a href="Security.php" class="nav-link px-2 link-dark">Новые заявки</a></li>
         <li><a href="carter.php" class="nav-link px-2 link-dark">Авто на территории</a></li>
-        <li><a href="completed.php" class="nav-link px-2 link-dark">Звершенные заявки</a></li>
+        <li><a href="completed.php" class="nav-link px-2 link-active">Звершенные заявки</a></li>
         <li><a href="seal.php" class="nav-link px-2 link-dark">Печать</a></li>
       </ul>
    
@@ -37,7 +37,6 @@
                 <th>Автомобиль</th>
                 <th>Адрес и заявитель</th>
                 <th>Ожидаемая дата</th>
-                <th>Действия</th>
             </tr>
         </thead>
         <tbody>   
@@ -53,10 +52,6 @@
                         <td><?= $userpass[3]?><br><?= $userpass[2]?>  </td>
                         <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td><?= $userpass[4]?></td>
-                        <td>
-                            <button type="button" class="btn btn-success style">Машина приехала</button><br><br>
-                            <button type="button" class="btn btn-secondary">Отменить заявку</button>
-                        </td>
                     </tr>
 
                     <?php
