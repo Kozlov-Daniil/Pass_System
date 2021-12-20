@@ -26,27 +26,30 @@
         <table class="table print">
             <thead class="thead-light">    
                 <tr>
-                    <th>id</th>
+                    <th>Статус</th>
                     <th>Автомобиль</th>
                     <th>Адрес и заявитель</th>
-                    <th>Ожидаемая дата</th>
+                    <th>Дата и время</th>
                 </tr>
             </thead>
             <tbody>   
                 <?php
                     $mysql = new mysqli('localhost','root','','pass_system');
                     
-                    $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car`"); 
+                    $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Завершена'"); 
                     $userpass = mysqli_fetch_all($userpass);
                     foreach ($userpass as $userpass){
                         ?>
-                        <tr>        
-                            <td><?= $userpass[0]?></td>
-                            <td><?= $userpass[3]?><br><?= $userpass[2]?>  </td>
+                        <tr> 
+                            <form action="autopark.php" method="post">
+                            <input type="hidden" class="form-control" name="id" value="24?>">  
+                            <input type="hidden" class="form-control" name="form-type" value="autopark"> 
+                            <td><button type="button" class="btn btn-secondary"><?= $userpass[9]?></button></td>
+                            <td><?= $userpass[3]?><br><?= $userpass[2]?></td>
                             <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                             <td><?= $userpass[4]?></td>
                         </tr>
-
+                        </form> 
                         <?php
                     }
                 ?>
@@ -55,3 +58,4 @@
         </div>
 </body>
 </html>
+

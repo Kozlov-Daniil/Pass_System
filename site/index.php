@@ -20,6 +20,46 @@
         <?php header('Location: Security.php'); ?>
         <p><a href="exit.php">Выйти</a></p>
 
+        <?php elseif ($_COOKIE['user'] == ''):  ?>
+            <h4 class="mb-5" style="text-align:center;">Подайте свою заявку для въезда</h4>
+            <div class="d-flex flex-wrap">
+                <div class="card mb-5 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Гостевое авто</h4>
+                    </div>
+                    <div class="card-body">
+                        <img class="img_form" src="img/1.png" alt="">
+                        <ul class="list-unstyled mt-3 mb-4">
+                        <li>Оформление заявки на получение пропуск для гостей</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-dark"><a href="auth.php" style="text-decoration:none; color:white; ">Оформить заявку</a></button>
+                    </div>
+                </div>
+                <div class="card mb-5 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Такси</h4>
+                    </div>
+                    <div class="card-body">
+                        <img class="img_form" src="img/2.png" alt="">
+                        <ul class="list-unstyled mt-3 mb-4">
+                        <li>Оформление заявки на получение пропуска для такси</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-dark"><a href="auth.php" style="text-decoration:none; color:white; ">Оформить заявку</a></button>
+                    </div>
+                </div>
+                <div class="card mb-5 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Служебное авто</h4>
+                    </div>
+                    <div class="card-body">
+                        <img class="img_form" src="img/3.png" alt="">
+                        <ul class="list-unstyled mt-3 mb-4">
+                        <li>Оформление заявки на получение пропуска для служебного авто</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-dark"><a href="auth.php" style="text-decoration:none; color:white; ">Оформить заявку</a></button>
+                    </div>
+                </div>
+
             <?php else: ?>
                 <h4 class="mb-5" style="text-align:center;">Подайте свою заявку для въезда</h4>
         <div class="d-flex flex-wrap">

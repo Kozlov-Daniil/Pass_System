@@ -33,7 +33,7 @@
     <table class="table">
         <thead class="thead-light">    
             <tr>
-                <th>id</th>
+                <th>Статус</th>
                 <th>Автомобиль</th>
                 <th>Адрес и заявитель</th>
                 <th>Ожидаемая дата</th>
@@ -44,21 +44,23 @@
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
                 
-                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car`"); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'На парковке'"); 
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
                     ?>
-                    <tr>        
-                        <td><?= $userpass[0]?> </td>
-                        <td><?= $userpass[3]?><br><?= $userpass[2]?>  </td>
+                    <tr> 
+                        <form action="autopark.php" method="post">
+                        <input type="hidden" class="form-control" name="id" value="28?>">  
+                        <input type="hidden" class="form-control" name="form-type" value="autopark"> 
+                        <td><button type="button" class="btn btn-success"><?= $userpass[9]?></button></td>
+                        <td><?= $userpass[3]?><br><?= $userpass[2]?></td>
                         <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td><?= $userpass[4]?></td>
                         <td>
-                            <button type="button" class="btn btn-danger ">Отменить выезд</button><br><br>
-                            <button type="button" class="btn btn-secondary">Завершить заявку</button>
+                            <input type="submit" name="button" value = "Завершить заявку" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px;"><br><br>
                         </td>
                     </tr>
-
+                    </form>      
                     <?php
                 }
             ?>

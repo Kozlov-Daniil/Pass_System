@@ -15,7 +15,7 @@
         <table class="table">
         <thead class="thead-light">    
             <tr>
-                <th>id</th>
+                <th>Статус</th>
                 <th>Номер машины</th>
                 <th>Ожидаемая дата</th>
                 <th>Редактирование</th>
@@ -31,7 +31,7 @@
                 foreach ($userpass as $pass){
                     ?>
                     <tr>        
-                        <td><?= $pass[0]?> </td>
+                    <td><button type="button" class="btn btn-secondary"><?= $pass[9]?></button></td>
                         <td><?= $pass[2]?> </td>
                         <td><?= $pass[4]?> </td>
                         <td>

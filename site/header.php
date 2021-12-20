@@ -17,6 +17,7 @@
         </ul>
         </div>
 </nav>
+
 <?php else: ?>
     <nav class="py-2 bg-light border-bottom">
         <div class="container d-flex flex-wrap">
