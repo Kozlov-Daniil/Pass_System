@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 19 2021 г., 18:35
+-- Время создания: Дек 20 2021 г., 01:28
 -- Версия сервера: 10.4.14-MariaDB
 -- Версия PHP: 7.4.10
 
@@ -36,16 +36,20 @@ CREATE TABLE `reg_car` (
   `address` varchar(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `phone_numbers` decimal(11,0) NOT NULL,
-  `comment` varchar(255) NOT NULL
+  `comment` varchar(255) NOT NULL,
+  `status` varchar(64) NOT NULL DEFAULT 'Ожидается'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `reg_car`
 --
 
-INSERT INTO `reg_car` (`id`, `id_user`, `num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_numbers`, `comment`) VALUES
-(22, 13, 'Г999ГГ', 'Красная машина', '2021-12-24 00:00:00', 'sdxada', 'Иванова Иван Иванович', '79812311223', 'Я хочу заехать'),
-(24, 59, 'A123AВ', 'Желтая машина', '2021-12-26 00:09:00', 'dszdsczdzs', 'Иванова Иван Иванович', '79812311223', 'Я хочу заехать');
+INSERT INTO `reg_car` (`id`, `id_user`, `num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_numbers`, `comment`, `status`) VALUES
+(24, 59, 'A123AВ', 'Желтая машина', '2021-12-26 00:09:00', 'dszdsczdzs', 'Иванова Иван Иванович', '79812311223', 'Я хочу заехать', 'Завершена'),
+(25, 13, 'A123AA', 'Синяя машина', '2021-12-21 00:32:00', 'фывфыфывф', 'Иванова Иван Иванович', '79812311223', 'Я хочу заехать', 'На парковке'),
+(26, 13, 'П100ПП', 'Зеленая машина', '2021-12-21 00:32:00', 'фывфывфывфыв', 'Серый Сергей Сергеевич', '78945612345', 'Я хочу заехать', 'Ожидается'),
+(27, 13, 'П100ПВ', 'Синяя машина', '2021-12-21 00:32:00', 'фывфывфывфыв', 'Серый Сергей Сергеевич', '78945612345', 'Я хочу заехать', 'Завершена'),
+(28, 13, 'П100ПП', 'Зеленая машина', '2021-12-21 00:32:00', 'фывфывфывфыв', 'Серый Сергей Сергеевич', '78945612345', 'Я хочу заехать', 'Отменена');
 
 -- --------------------------------------------------------
 
@@ -99,7 +103,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `reg_car`
 --
 ALTER TABLE `reg_car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
