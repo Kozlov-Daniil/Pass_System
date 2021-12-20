@@ -188,6 +188,17 @@ def process_sendreg_step(message):
 			
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка подачи заявки')
+		
+	markup_inline = types.InlineKeyboardMarkup()
+	item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+	item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+
+	markup_inline.add(item_1, item_2)
+	bot.send_message(message.chat.id, 'Меню',
+	reply_markup = markup_inline
+	)
+
+
 
 
 
