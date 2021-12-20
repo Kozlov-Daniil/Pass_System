@@ -117,6 +117,80 @@ def process_lotnumber_step(message):
 	reply_markup = markup_inline
 	)
 
+@bot.callback_query_handler(func = lambda call: True)
+def answer(call):
+	if call.data == '1':
+		msg = bot.send_message(call.from_user.id, "Введите номер автомобиля")
+		bot.register_next_step_handler(msg, process_numcar_step)
+	elif call.data == '2':
+		pass
+def process_numcar_step(message):
+	try:
+		Car.numcar = message.text
+
+		msg = bot.send_message(message.chat.id, "Введите дополнительную информацию")
+		bot.register_next_step_handler(msg, process_addinfo_step)
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка')
+def process_addinfo_step(message):
+	try:
+		Car.addinfo = message.text
+
+		msg = bot.send_message(message.chat.id, "Введите дату в форме <0000-00-00 00:00:00>")
+		bot.register_next_step_handler(msg, process_datatime_step)
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка')
+def process_datatime_step(message):
+	try:
+		Car.datatime = message.text
+
+		msg = bot.send_message(message.chat.id, "Введите адрес")
+		bot.register_next_step_handler(msg, process_address_step)
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка')
+def process_address_step(message):
+	try:
+		Car.address = message.text
+
+		msg = bot.send_message(message.chat.id, "Введите ФИО")
+		bot.register_next_step_handler(msg, process_fullname_step)
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка')
+def process_fullname_step(message):
+	try:
+		Car.fullname = message.text
+
+		msg = bot.send_message(message.chat.id, "Введите номер телефона")
+		bot.register_next_step_handler(msg, process_phonenumbers_step)
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка')
+def process_phonenumbers_step(message):
+	try:
+		Car.phonenumbers = message.text
+
+		msg = bot.send_message(message.chat.id, "Введите комментарий")
+		bot.register_next_step_handler(msg, process_sendreg_step)
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка')
+def process_sendreg_step(message):
+	try:
+		Car.comment = message.text
+
+		sql = "INSERT INTO reg_car (num_car, add_info, data_time, address, full_name, phone_numbers, comment) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+		val2 = (Car.numcar, Car.addinfo, Car.datatime, Car.address, Car.fullname, Car.phonenumbers, Car.comment)
+		cursor.execute(sql, val2)
+		db.commit()
+
+
+
+		bot.send_message(message.chat.id, "Заявка создана")
+		
+			
+	except Exception as e:
+		bot.reply_to(message, 'Ошибка подачи заявки')
+
+
+
 
 bot.enable_save_next_step_handlers(delay=2)
 
@@ -125,4 +199,3 @@ bot.load_next_step_handlers()
 
 
 bot.polling(none_stop = True, interval = 0)
-
