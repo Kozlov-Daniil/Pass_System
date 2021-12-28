@@ -63,6 +63,7 @@ def start(message):
 		bot.send_message(message.chat.id, 'Меню',
 		reply_markup = markup_inline
 		)
+
 def process_name_step(message):
 	try:
 		id_telegramm = message.from_user.id
@@ -161,15 +162,20 @@ def process_sendreg_step(message):
 		Car.comment = message.text
 		people_id = message.chat.id
 
-	
-
-		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, address,  comment) VALUES (%s, %s, %s, %s, %s, %s)"
-		
+		cursor.execute(f"SELECT name FROM users WHERE id_telegramm = {people_id}")
+		sql2 = cursor.fetchone()
+		cursor.execute(f"SELECT phone_number FROM users WHERE id_telegramm = {people_id}")
+		sql3 = cursor.fetchone()
+		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, address, comment) VALUES (%s, %s, %s, %s, %s, %s)"
 		val2 = (people_id, Car.numcar, Car.addinfo, Car.datatime, Car.address, Car.comment)
-		cursor.execute(sql, val2)
+		cursor.execute( sql, val2)
+		sql4 = "UPDATE reg_car SET full_name = %s"
+		val3 = (sql2)
+		cursor.execute(sql4, val3)
+		sql5 = "UPDATE reg_car SET phone_numbers = %s"
+		val4 = (sql3)
+		cursor.execute(sql5, val4)
 		db.commit()
-
-
 
 		bot.send_message(message.chat.id, "Заявка создана")
 		
@@ -198,3 +204,4 @@ bot.load_next_step_handlers()
 
 
 bot.polling(none_stop = True, interval = 0)
+
