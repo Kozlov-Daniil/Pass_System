@@ -151,23 +151,7 @@ def process_datatime_step(message):
 def process_address_step(message):
 	try:
 		Car.address = message.text
-
-		msg = bot.send_message(message.chat.id, "Введите ФИО")
-		bot.register_next_step_handler(msg, process_fullname_step)
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка')
-def process_fullname_step(message):
-	try:
-		Car.fullname = message.text
-
-		msg = bot.send_message(message.chat.id, "Введите номер телефона")
-		bot.register_next_step_handler(msg, process_phonenumbers_step)
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка')
-def process_phonenumbers_step(message):
-	try:
-		Car.phonenumbers = message.text
-
+		
 		msg = bot.send_message(message.chat.id, "Введите комментарий")
 		bot.register_next_step_handler(msg, process_sendreg_step)
 	except Exception as e:
@@ -175,9 +159,13 @@ def process_phonenumbers_step(message):
 def process_sendreg_step(message):
 	try:
 		Car.comment = message.text
+		people_id = message.chat.id
 
-		sql = "INSERT INTO reg_car (num_car, add_info, data_time, address, full_name, phone_numbers, comment) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-		val2 = (Car.numcar, Car.addinfo, Car.datatime, Car.address, Car.fullname, Car.phonenumbers, Car.comment)
+	
+
+		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, address,  comment) VALUES (%s, %s, %s, %s, %s, %s)"
+		
+		val2 = (people_id, Car.numcar, Car.addinfo, Car.datatime, Car.address, Car.comment)
 		cursor.execute(sql, val2)
 		db.commit()
 
