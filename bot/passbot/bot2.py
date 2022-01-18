@@ -52,8 +52,13 @@ def start(message):
 	cursor.execute(f"SELECT id_telegramm FROM users WHERE id_telegramm = {people_id}")
 	data = cursor.fetchone()
 	if data is None:
-			msg = bot.send_message(message.chat.id, "Введите ФИО")
-			bot.register_next_step_handler(msg, process_name_step)
+		msg = bot.send_message(message.chat.id, "Введите ФИО")
+		bot.register_next_step_handler(msg, process_name_step)
+
+	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id}")
+	approved = cursor.fetchone()
+	if approved is None:
+		msg = bot.send_message(message.chat.id, "None approved")
 	else:
 		markup_inline = types.InlineKeyboardMarkup()
 		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
@@ -63,6 +68,7 @@ def start(message):
 		bot.send_message(message.chat.id, 'Меню',
 		reply_markup = markup_inline
 		)
+		
 
 def process_name_step(message):
 	try:
@@ -96,62 +102,54 @@ def process_lotnumber_step(message):
 		user = user_data[id_telegramm]
 		user.lotnumber = message.text
 
-		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm) VALUES (%s, %s, %s, %s)"
+		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, 0)"
 		val = (user.name, user.phonenumber, user.lotnumber, id_telegramm)
 		cursor.execute(sql, val)
 		db.commit()
 
-
-
-		bot.send_message(message.chat.id, "Регистрация завершена")
+		bot.send_message(message.chat.id, "Регистрация завершена, ожидайте подтверждения учётной записи")
 		
 			
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка или вы уже зарегистрированы')
 
-	markup_inline = types.InlineKeyboardMarkup()
-	item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
-	item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id}")
+	approved = cursor.fetchone()
+	if approved is None:
+		msg = bot.send_message(message.chat.id, "None approved")
+	else:
+		markup_inline = types.InlineKeyboardMarkup()
+		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
 
-	markup_inline.add(item_1, item_2)
-	bot.send_message(message.chat.id, 'Меню',
-	reply_markup = markup_inline
-	)
+		markup_inline.add(item_1, item_2)
+		bot.send_message(message.chat.id, 'Меню',
+		reply_markup = markup_inline
+		)
 
 @bot.callback_query_handler(func = lambda call: True)
 def answer(call):
 	if call.data == '1':
-		msg = bot.send_message(call.from_user.id, "Введите номер автомобиля")
-		bot.register_next_step_handler(msg, process_numcar_step)
+			msg = bot.send_message(call.from_user.id, "Введите номер автомобиля")
+			bot.register_next_step_handler(msg, process_numcar_step)
 	elif call.data == '2':
 		pass
 def process_numcar_step(message):
-	try:
-		Car.numcar = message.text
-
-		msg = bot.send_message(message.chat.id, "Введите дополнительную информацию")
-		bot.register_next_step_handler(msg, process_addinfo_step)
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка')
+	Car.numcar = message.text
+	
+	msg = bot.send_message(message.chat.id, "Введите дополнительную информацию")
+	bot.register_next_step_handler(msg, process_addinfo_step)
 def process_addinfo_step(message):
 	try:
 		Car.addinfo = message.text
 
 		msg = bot.send_message(message.chat.id, "Введите дату в форме <0000-00-00 00:00:00>")
-		bot.register_next_step_handler(msg, process_datatime_step)
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка')
-def process_datatime_step(message):
-	try:
-		Car.datatime = message.text
-
-		msg = bot.send_message(message.chat.id, "Введите адрес")
 		bot.register_next_step_handler(msg, process_address_step)
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка')
 def process_address_step(message):
 	try:
-		Car.address = message.text
+		Car.datatime = message.text
 		
 		msg = bot.send_message(message.chat.id, "Введите комментарий")
 		bot.register_next_step_handler(msg, process_sendreg_step)
@@ -166,8 +164,10 @@ def process_sendreg_step(message):
 		sql2 = cursor.fetchone()
 		cursor.execute(f"SELECT phone_number FROM users WHERE id_telegramm = {people_id}")
 		sql3 = cursor.fetchone()
-		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, address, comment) VALUES (%s, %s, %s, %s, %s, %s)"
-		val2 = (people_id, Car.numcar, Car.addinfo, Car.datatime, Car.address, Car.comment)
+		cursor.execute(f"SELECT lot_number FROM users WHERE id_telegramm = {people_id}")
+		lotnumber = cursor.fetchone()
+		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, comment) VALUES (%s, %s, %s, %s, %s)"
+		val2 = (people_id, Car.numcar, Car.addinfo, Car.datatime,Car.comment)
 		cursor.execute( sql, val2)
 		sql4 = "UPDATE reg_car SET full_name = %s"
 		val3 = (sql2)
@@ -175,6 +175,9 @@ def process_sendreg_step(message):
 		sql5 = "UPDATE reg_car SET phone_numbers = %s"
 		val4 = (sql3)
 		cursor.execute(sql5, val4)
+		sql6 = "UPDATE reg_car SET address = %s"
+		val5 = (lotnumber)
+		cursor.execute(sql6, val5)
 		db.commit()
 
 		bot.send_message(message.chat.id, "Заявка создана")
@@ -204,4 +207,3 @@ bot.load_next_step_handlers()
 
 
 bot.polling(none_stop = True, interval = 0)
-
