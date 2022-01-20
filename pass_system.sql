@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 29 2021 г., 22:33
+-- Время создания: Янв 20 2022 г., 23:22
 -- Версия сервера: 10.4.14-MariaDB
 -- Версия PHP: 7.4.9
 
@@ -45,7 +45,8 @@ CREATE TABLE `reg_car` (
 --
 
 INSERT INTO `reg_car` (`id`, `id_user`, `num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_numbers`, `comment`, `approved`) VALUES
-(40, 865231654, '214', '421', '0000-00-00 00:00:00', '421', 'Козлов Даниил Анатольевич', '79027220728', '421', 0);
+(69, 865231654, '123', '4124', '0000-00-00 00:00:00', 'Первомайская дом 92', 'Козлов Даниил Анатольевич', '79027220728', '412414', 0),
+(70, 865231654, '123', 'wfa', '0000-00-00 00:00:00', 'Первомайская дом 92', 'Козлов Даниил Анатольевич', '79027220728', 'faw', 0);
 
 -- --------------------------------------------------------
 
@@ -58,16 +59,17 @@ CREATE TABLE `users` (
   `phone_number` decimal(11,0) DEFAULT NULL,
   `lot_number` varchar(255) DEFAULT NULL,
   `id_user` int(11) NOT NULL,
-  `id_telegramm` int(11) DEFAULT NULL
+  `id_telegramm` int(11) DEFAULT NULL,
+  `approved` int(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`name`, `phone_number`, `lot_number`, `id_user`, `id_telegramm`) VALUES
-('Иванов Иван Иванович', '79812311223', 'Ул. Красная д.10 кв. 55', 13, 533873246),
-('Козлов Даниил Анатольевич', '79027220728', '1', 83, 865231654);
+INSERT INTO `users` (`name`, `phone_number`, `lot_number`, `id_user`, `id_telegramm`, `approved`) VALUES
+('Иванов Иван Иванович', '79812311223', 'Ул. Красная д.10 кв. 55', 13, 533873246, 0),
+('Козлов Даниил Анатольевич', '79027220728', 'Первомайская дом 92', 115, 865231654, 0);
 
 --
 -- Индексы сохранённых таблиц
@@ -94,13 +96,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `reg_car`
 --
 ALTER TABLE `reg_car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
