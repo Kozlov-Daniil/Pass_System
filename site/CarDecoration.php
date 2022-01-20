@@ -22,23 +22,23 @@
             <label for="num_car">Гос. номер авто*</label>
             <input type="text" class="form-control" name="num_car" id="num_car"><br>
 
-            <label for="add_info">Дополнительная информация</label>
-            <input type="text" class="form-control" name="add_info" id="add_info"><br>
+            <!-- <label for="add_info">Дополнительная информация</label> -->
+            <input type="hidden" class="form-control" name="add_info" id="add_info"><br>
 
             <label for="data_time">Ожидаемая дата и время*</label>
             <input type="datetime-local" class="form-control" name="data_time" id="data_time"><br>
 
-            <label for="address">Адрес назначения*</label>
-            <input type="text" class="form-control" name="address" id="address"><br>
+            <!-- <label for="address">Адрес назначения*</label> -->
+            <input type="hidden" class="form-control" name="address" id="address"><br>
 
             <label for="full_name">Ваше ФИО*</label>
             <input type="text" class="form-control" name="full_name" id="full_name"><br>
 
-            <label for="phone_numbers">Ваш телефон*</label>
-            <input type="text" class="form-control" name="phone_numbers" id="phone_numbers"><br>
+            <!-- <label for="phone_numbers">Ваш телефон*</label> -->
+            <input type="hidden" class="form-control" name="phone_numbers" id="phone_numbers"><br>
 
-            <label for="comment">Комментарий</label>
-            <input type="text" class="form-control" name="comment" id="comment"><br>
+            <!-- <label for="comment">Комментарий</label> -->
+            <input type="hidden" class="form-control" name="comment" id="comment"><br>
 
             <button class="btn btn-secondary">Отмена</button>
             <button class="btn btn-success" type="submit">Создать заявку</button>

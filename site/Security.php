@@ -12,13 +12,13 @@
 <div class="container" >
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a href="exit.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-       Назад
+       Выйти
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-dark ">Список пропусков</a></li>
       </ul>
       <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-success me-2">Оформить заявку</button>
+      <button type="button" class="btn btn-outline-success me-2"><a href="CarDecoration.php">Оформить заявку</a></button>
       </div>
     </header>
     
@@ -57,6 +57,7 @@
                         <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td><?= $userpass[4]?></td>
                         <td style="">
+                            <button type="button" class="btn btn-info"><a href="CarDecorationsec.php?id=<?=$userpass[0]?>" style="color:white; text-decoration:none; padding: 7px;">Дополнительно</a></button>
                             <input type="submit" name="button" value = "Машина приехала" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px;"><br><br>
                             <input type="submit" name="button" value = "Отмена" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px;">
                         </td>
