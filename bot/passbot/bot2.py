@@ -55,11 +55,15 @@ def start(message):
 		msg = bot.send_message(message.chat.id, "Введите ФИО")
 		bot.register_next_step_handler(msg, process_name_step)
 
-	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id}")
+	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
 	approved = cursor.fetchone()
+	print (approved)
 	if approved is None:
-		msg = bot.send_message(message.chat.id, "None approved")
-	else:
+		print (0)
+		msg = bot.send_message(message.chat.id, "Аккаунт не подтверждён")
+	elif not None:
+		msg = bot.send_message(message.chat.id, "Подтверждённый аккаунт")
+
 		markup_inline = types.InlineKeyboardMarkup()
 		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
 		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
@@ -68,6 +72,8 @@ def start(message):
 		bot.send_message(message.chat.id, 'Меню',
 		reply_markup = markup_inline
 		)
+
+		
 		
 
 def process_name_step(message):
@@ -102,22 +108,25 @@ def process_lotnumber_step(message):
 		user = user_data[id_telegramm]
 		user.lotnumber = message.text
 
-		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, 0)"
+		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, NULL)"
 		val = (user.name, user.phonenumber, user.lotnumber, id_telegramm)
 		cursor.execute(sql, val)
 		db.commit()
 
 		bot.send_message(message.chat.id, "Регистрация завершена, ожидайте подтверждения учётной записи")
+		markup_inline = types.InlineKeyboardMarkup()
+		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+
+		markup_inline.add(item_1, item_2)
+		bot.send_message(message.chat.id, 'Меню',
+		reply_markup = markup_inline
+		)
 		
 			
 	except Exception as e:
 		bot.reply_to(message, 'Ошибка или вы уже зарегистрированы')
-
-	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id}")
-	approved = cursor.fetchone()
-	if approved is None:
-		msg = bot.send_message(message.chat.id, "None approved")
-	else:
+	
 		markup_inline = types.InlineKeyboardMarkup()
 		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
 		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
@@ -136,9 +145,19 @@ def answer(call):
 		pass
 def process_numcar_step(message):
 	Car.numcar = message.text
+	people_id = message.chat.id 
 	
-	msg = bot.send_message(message.chat.id, "Введите дополнительную информацию")
-	bot.register_next_step_handler(msg, process_addinfo_step)
+	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
+	approved = cursor.fetchone()
+	print (approved)
+	if approved is None:
+		print(0)
+		msg = bot.send_message(message.chat.id, "Аккаунт не подтверждён")
+	elif not None:
+		print(1)
+		msg = bot.send_message(message.chat.id, "Аккаунт подтверждён")
+		msg = bot.send_message(message.chat.id, "Введите дополнительную информацию")
+		bot.register_next_step_handler(msg, process_addinfo_step)
 def process_addinfo_step(message):
 	try:
 		Car.addinfo = message.text
@@ -180,7 +199,7 @@ def process_sendreg_step(message):
 		cursor.execute(sql6, val5)
 		db.commit()
 
-		bot.send_message(message.chat.id, "Заявка создана")
+		bot.send_message(message.chat.id, "Ваша заявка принята")
 		
 			
 	except Exception as e:
