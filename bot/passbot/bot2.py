@@ -59,7 +59,6 @@ def start(message):
 	approved = cursor.fetchone()
 	print (approved)
 	if approved is None:
-		print (0)
 		msg = bot.send_message(message.chat.id, "Аккаунт не подтверждён")
 	elif not None:
 		msg = bot.send_message(message.chat.id, "Подтверждённый аккаунт")
@@ -146,18 +145,26 @@ def answer(call):
 def process_numcar_step(message):
 	Car.numcar = message.text
 	people_id = message.chat.id 
-	
+	Car.numcar=Car.numcar.strip().split(" ")
 	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
 	approved = cursor.fetchone()
-	print (approved)
 	if approved is None:
-		print(0)
+		
 		msg = bot.send_message(message.chat.id, "Аккаунт не подтверждён")
 	elif not None:
-		print(1)
+		
 		msg = bot.send_message(message.chat.id, "Аккаунт подтверждён")
 		msg = bot.send_message(message.chat.id, "Введите дополнительную информацию")
 		bot.register_next_step_handler(msg, process_addinfo_step)
+
+	d = {}
+	for i,j in enumerate(Car.numcar,1):
+	    d["string{0}".format(i)]=j 
+
+	    print (j)
+
+	
+	
 def process_addinfo_step(message):
 	try:
 		Car.addinfo = message.text
@@ -187,6 +194,7 @@ def process_sendreg_step(message):
 		lotnumber = cursor.fetchone()
 		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, comment) VALUES (%s, %s, %s, %s, %s)"
 		val2 = (people_id, Car.numcar, Car.addinfo, Car.datatime,Car.comment)
+		print (val2)
 		cursor.execute( sql, val2)
 		sql4 = "UPDATE reg_car SET full_name = %s"
 		val3 = (sql2)
