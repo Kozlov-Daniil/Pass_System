@@ -15,10 +15,10 @@
             <img  src="img/arow.png" alt="">
         </a>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-dark ">Список пропусков</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark " style="font-size:20px;">Список пропусков</a></li>
         </ul>
         <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-secondary me-2" onClick="window.print()">Распечатать</button>
+        <button type="button" class="btn btn-outline-secondary me-2" onClick="window.print()" style="font-size:20px;">Распечатать</button>
         </div>
         </header>
     </div>
@@ -26,10 +26,10 @@
         <table class="table print">
             <thead class="thead-light">    
                 <tr>
-                    <th>Статус</th>
-                    <th>Автомобиль</th>
-                    <th>Адрес и заявитель</th>
-                    <th>Дата и время</th>
+                    <th style="font-size:22px;">Статус</th>
+                    <th style="font-size:22px;">Автомобиль</th>
+                    <th style="font-size:22px;">Адрес и заявитель</th>
+                    <th style="font-size:22px;">Дата и время</th>
                 </tr>
             </thead>
             <tbody>   
@@ -43,11 +43,11 @@
                         <tr> 
                             <form action="autopark.php" method="post">
                             <input type="hidden" class="form-control" name="id" value="24?>">  
-                            <input type="hidden" class="form-control" name="form-type" value="autopark"> 
-                            <td><button type="button" class="btn btn-secondary"><?= $userpass[9]?></button></td>
-                            <td><?= $userpass[3]?><br><?= $userpass[2]?></td>
-                            <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
-                            <td><?= $userpass[4]?></td>
+                            <input type="hidden" class="form-control" name="form-type" value="autopark" > 
+                            <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:20px;"><?= $userpass[9]?></button></td>
+                            <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
+                            <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
+                            <td style="font-size:20px;"><?= $userpass[4]?></td>
                         </tr>
                         </form> 
                         <?php

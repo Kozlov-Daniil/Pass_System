@@ -15,29 +15,29 @@
         Выйти
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-dark ">Список пропусков</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark " style="font-size:20px;">Список пропусков</a></li>
       </ul>
       <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-success me-2">Оформить заявку</button>
+      <button type="button" class="btn btn-outline-success me-2" style="font-size:20px; text-decoration: none;">Оформить заявку</button>
       </div>
     </header>
     
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 nav-tabs">
-        <li><a href="Security.php" class="nav-link px-2 link-dark">Новые заявки</a></li>
-        <li><a href="carter.php" class="nav-link px-2 link-active">Авто на территории</a></li>
-        <li><a href="completed.php" class="nav-link px-2 link-dark">Звершенные заявки</a></li>
-        <li><a href="seal.php" class="nav-link px-2 link-dark">Печать</a></li>
+        <li><a href="Security.php" class="nav-link px-2 link-dark" style="font-size:20px;">Новые заявки</a></li>
+        <li><a href="carter.php" class="nav-link px-2 link-active" style="font-size:20px;">Авто на территории</a></li>
+        <li><a href="completed.php" class="nav-link px-2 link-dark" style="font-size:20px;">Звершенные заявки</a></li>
+        <li><a href="seal.php" class="nav-link px-2 link-dark" style="font-size:20px;">Печать</a></li>
       </ul>
    
     <div class="container mt-4">
     <table class="table">
         <thead class="thead-light">    
             <tr>
-                <th>Статус</th>
-                <th>Автомобиль</th>
-                <th>Адрес и заявитель</th>
-                <th>Ожидаемая дата</th>
-                <th>Действия</th>
+                <th style="font-size:22px;">Статус</th>
+                <th style="font-size:22px;">Автомобиль</th>
+                <th style="font-size:22px;">Адрес и заявитель</th>
+                <th style="font-size:22px;">Ожидаемая дата</th>
+                <th style="font-size:22px;">Действия</th>
             </tr>
         </thead>
         <tbody>   
@@ -52,12 +52,12 @@
                         <form action="autopark.php" method="post">
                         <input type="hidden" class="form-control" name="id" value="28?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
-                        <td><button type="button" class="btn btn-success"><?= $userpass[9]?></button></td>
-                        <td><?= $userpass[3]?><br><?= $userpass[2]?></td>
-                        <td><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
-                        <td><?= $userpass[4]?></td>
+                        <td style="font-size:20px;"><button type="button" class="btn btn-success" style="font-size:20px;"><?= $userpass[9]?></button></td>
+                        <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
+                        <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
+                        <td style="font-size:20px;"><?= $userpass[4]?></td>
                         <td>
-                            <input type="submit" name="button" value = "Завершить заявку" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px;"><br><br>
+                            <input type="submit" name="button" value = "Завершить заявку" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:20px;"><br><br>
                         </td>
                     </tr>
                     </form>      

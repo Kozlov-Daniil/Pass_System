@@ -8,7 +8,6 @@
     $userpass_id = $_GET['id'];
     $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `id` = '$userpass_id'");
     $userpass = mysqli_fetch_assoc($userpass);
-    print_r($_POST);
 
 ?>
 <!Doctype html>
