@@ -48,9 +48,9 @@
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
                     ?>
-                    <tr> 
+                    <tr>
                         <form action="autopark.php" method="post">
-                        <input type="hidden" class="form-control" name="id" value="24?>">  
+                        <input type="hidden" class="form-control" name="id" value="<?=$userpass[0]?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
                         <td style="font-size:20px;"><button type="button" class="btn btn-danger" style="font-size:20px;"><?= $userpass[9]?></button></td>
                         <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>

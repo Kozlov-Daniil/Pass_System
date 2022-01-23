@@ -43,13 +43,13 @@
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
                 
-                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Завершена'"); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Завершена' OR `status` = 'Отменена'"); 
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
                     ?>
                     <tr> 
                         <form action="autopark.php" method="post">
-                        <input type="hidden" class="form-control" name="id" value="28>">  
+                        <input type="hidden" class="form-control" name="id" value="<?=$userpass[0]?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
                         <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:20px;"><?= $userpass[9]?></button></td>
                         <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
