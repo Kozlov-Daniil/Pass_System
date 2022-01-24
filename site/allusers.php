@@ -1,3 +1,6 @@
+<?php
+    error_reporting(0);
+?>
 <!Doctype html>
 <html>
  <head>
@@ -18,7 +21,7 @@
         <li><a href="#" class="nav-link px-2 link-dark " style="font-size:20px;">Список пропусков</a></li>
       </ul>
       <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-success me-2"><a href="CarDecoration.php" style="font-size:20px; text-decoration: none;">Оформить заявку</a></button>
+      <button type="button" class="btn btn-outline-light" ><a href="CarDecoration.php" style="font-size:20px; text-decoration: none; ">Оформить заявку</a></button>
       </div>
     </header>
     
@@ -41,47 +44,19 @@
                 <th style="font-size:22px;">Действия</th>
             </tr>
         </thead>
-        <!-- <tbody>   
-            </?php
-                $mysql = new mysqli('localhost','root','','pass_system');
-
-                $userpass = mysqli_query($mysql, "SELECT * FROM `users`"); 
-                $userpass = mysqli_fetch_all($userpass);
-                foreach ($userpass as $userpass){
-                    ?>
-                    <tr>
-                        <input type="hidden" class="form-control" name="id_user" value="</?=$userpass[3]?>">  
-                        <input type="hidden" class="form-control" name="form-type" value="autopark"> 
-                        <td style="font-size:20px;"></?= $userpass[0]?></td>
-                        <td style="font-size:20px;"></?= $userpass[1]?></td>
-                        <td style="font-size:20px;"></?= $userpass[2]?></td>
-                        <td style="font-size:20px;"><//?= $userpass[4]?></td>
-                        <td style="font-size:20px;">
-                            <a href="usersform.php?id=<//?=$userpass[3]?>"><img class="" src="img/edit.png" alt="" ></a>
-                            <a href="deleteuser.php?id=<//?=$userpass[3]?>"><img class="" src="img/trash.png" alt=""></a>
-                            <button type="button" class="btn btn-info"><a href="CarDecorationsec.php?id=<//?=$userpass[0]?>" style="color:white; text-decoration:none; padding: 7px; font-size:20px;">Изменить</a></button>
-                            <input type="submit" name="button" value = "Машина приехала" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; font-size:20px;"><br>
-                            <input type="submit" name="button" value = "Отмена" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:20px;"> -->
-                        <!-- </td>
-                    </tr>      -->
-                    <?//php
-                //}
-            ?>
-        <!-- </tbody> --> 
         <tbody>   
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
-                $id_user = $_COOKIE['id_user'];
                 $userpass = mysqli_query($mysql, "SELECT * FROM `users`"); 
                 $userpass = mysqli_fetch_all($userpass);
 
                 foreach ($userpass as $pass){
                     ?>
                     <tr>        
-                        <td><?= $pass[0]?></td>
-                        <td><?= $pass[1]?> </td>
-                        <td><?= $pass[2]?> </td>
-                        <td><?= $pass[4]?> </td>
+                        <td style="font-size:20px;"><?= $pass[0]?></td>
+                        <td style="font-size:20px;"><?= $pass[1]?> </td>
+                        <td style="font-size:20px;"><?= $pass[2]?> </td>
+                        <td style="font-size:20px;"> <?= $pass[4]?> </td>
                         <td>
                             <a href="usersform.php?id_user=<?=$pass[3]?>"><img class="" src="img/edit.png" alt="" ></a>
                             <a href="deleteuser.php?id_user=<?=$pass[3]?>"><img class="" src="img/trash.png" alt=""></a>

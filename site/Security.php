@@ -18,7 +18,7 @@
         <li><a href="#" class="nav-link px-2 link-dark " style="font-size:20px;">Список пропусков</a></li>
       </ul>
       <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-success me-2"><a href="CarDecoration.php" style="font-size:20px; text-decoration: none;">Оформить заявку</a></button>
+      <button type="button" class="btn btn-outline-light" ><a href="CarDecoration.php" style="font-size:20px; text-decoration: none; ">Оформить заявку</a></button>
       </div>
     </header>
     
@@ -53,14 +53,14 @@
                         <form action="autopark.php" method="post">
                         <input type="hidden" class="form-control" name="id" value="<?=$userpass[0]?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
-                        <td style="font-size:20px;"><button type="button" class="btn btn-danger" style="font-size:20px;"><?= $userpass[9]?></button></td>
+                        <td style="font-size:20px;"><button type="button" class="btn btn-danger" style="font-size:18px;"><?= $userpass[9]?></button></td>
                         <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
                         <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td style="font-size:20px;"><?= $userpass[4]?></td>
                         <td style="font-size:20px;">
-                            <button type="button" class="btn btn-info"><a href="CarDecorationsec.php?id=<?=$userpass[0]?>" style="color:white; text-decoration:none; padding: 7px; font-size:20px;">Дополнительно</a></button>
-                            <input type="submit" name="button" value = "Машина приехала" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; font-size:20px;"><br><br>
-                            <input type="submit" name="button" value = "Отмена" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:20px;">
+                            <button type="button" class="btn btn-info"><a href="CarDecorationsec.php?id=<?=$userpass[0]?>" style="color:white; text-decoration:none; padding: 7px; font-size:18px; ">Редактировать</a></button><br>
+                            <input type="submit" name="button" value = "Машина приехала" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; margin-top: 10px; font-size:18px;"><br>
+                            <input type="submit" name="button" value = "Отмена" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:18px; margin-top: 10px;">
                         </td>
                     </tr>
                     </form>      

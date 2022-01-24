@@ -36,7 +36,7 @@
                 <?php
                     $mysql = new mysqli('localhost','root','','pass_system');
                     
-                    $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Завершена'"); 
+                    $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Завершена' OR `status` = 'Отменена'"); 
                     $userpass = mysqli_fetch_all($userpass);
                     foreach ($userpass as $userpass){
                         ?>
@@ -44,7 +44,7 @@
                             <form action="autopark.php" method="post">
                             <input type="hidden" class="form-control" name="id" value="24?>">  
                             <input type="hidden" class="form-control" name="form-type" value="autopark" > 
-                            <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:20px;"><?= $userpass[9]?></button></td>
+                            <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:18px;"><?= $userpass[9]?></button></td>
                             <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
                             <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                             <td style="font-size:20px;"><?= $userpass[4]?></td>

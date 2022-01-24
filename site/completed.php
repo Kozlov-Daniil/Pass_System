@@ -18,7 +18,7 @@
         <li><a href="#" class="nav-link px-2 link-dark " style="font-size:20px;">Список пропусков</a></li>
       </ul>
       <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-success me-2" style="font-size:20px; text-decoration: none;"> Оформить заявку</button>
+      <button type="button" class="btn btn-outline-light" ><a href="CarDecoration.php" style="font-size:20px; text-decoration: none; ">Оформить заявку</a></button>
       </div>
     </header>
     
@@ -52,7 +52,7 @@
                         <form action="autopark.php" method="post">
                         <input type="hidden" class="form-control" name="id" value="<?=$userpass[0]?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
-                        <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:20px;"><?= $userpass[9]?></button></td>
+                        <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:18px;"><?= $userpass[9]?></button></td>
                         <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
                         <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td style="font-size:20px;"><?= $userpass[4]?></td>
