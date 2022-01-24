@@ -157,10 +157,14 @@ def process_numcar_step(message):
 		reply_markup = markup_inline
 		)
 	elif not None:	
+		try:
 
-		d = {}
-		for i,j in enumerate(Car.numcar,1):
-		    d["string{0}".format(i)]=j 
+			d = {}
+			for i,j in enumerate(Car.numcar,1):
+			    d["string{0}".format(i)]=j 
+		except:
+			msg = bot.send_message(call.from_user.id, "Что-то пошло не так, повторите попытку ввода")
+			bot.register_next_step_handler(msg, process_numcar_step)
 	 
 		
 		people_id = message.chat.id
