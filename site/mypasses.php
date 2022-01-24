@@ -31,7 +31,7 @@
                 foreach ($userpass as $pass){
                     ?>
                     <tr>        
-                    <td><button type="button" class="btn btn-secondary"><?= $pass[9]?></button></td>
+                        <td><button type="button" class="btn btn-secondary"><?= $pass[9]?></button></td>
                         <td><?= $pass[2]?> </td>
                         <td><?= $pass[4]?> </td>
                         <td>

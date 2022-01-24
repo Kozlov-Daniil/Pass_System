@@ -23,6 +23,7 @@
     </header>
     
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 nav-tabs">
+    <li><a href="allusers.php" class="nav-link px-2 link-dark" style="font-size:20px;">Пользователи</a></li>
     <li><a href="Security.php" class="nav-link px-2 link-dark" style="font-size:20px;">Новые заявки</a></li>
         <li><a href="carter.php" class="nav-link px-2 link-dark" style="font-size:20px;">Авто на территории</a></li>
         <li><a href="completed.php" class="nav-link px-2 link-active" style="font-size:20px;">Звершенные заявки</a></li>

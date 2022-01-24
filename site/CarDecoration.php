@@ -22,16 +22,11 @@
             <label for="num_car">Гос. номер авто*</label>
             <input type="text" class="form-control" name="num_car" id="num_car"><br>
 
- 
-
             <label for="data_time">Ожидаемая дата и время*</label>
             <input type="datetime-local" class="form-control" name="data_time" id="data_time"><br>
 
-
-
             <label for="full_name">Ваше ФИО*</label>
             <input type="text" class="form-control" name="full_name" id="full_name"><br>
-
 
             <button class="btn btn-secondary">Отмена</button>
             <button class="btn btn-success" type="submit">Создать заявку</button>

@@ -34,3 +34,10 @@ form{
     width: 100%;
 }
 
+@media print{
+    .sps{
+        display: none;
+    }
+
+
+}
