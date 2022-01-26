@@ -49,7 +49,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="CarDecoration.php">
+            <a class="nav-link" href="CarDecorationс.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
             Оформить заявку
             </a>
@@ -71,65 +71,27 @@
     
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Завершенные заявки</h1>
+        <h1 class="h2">Оформление заявки</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
       </div>
-    <table class="table">
-        <thead class="thead-light">    
-            <tr>
-                <th style="font-size:22px;">ФИО</th>
-                <th style="font-size:22px;">Номер телефона</th>
-                <th style="font-size:22px;">Адрес пользователя</th>
-                <th style="font-size:22px;">ID Телеграмма</th>
-                <th style="font-size:22px;">Действия</th>
-            </tr>
-        </thead>
-        <tbody>   
-            <?php
-                $mysql = new mysqli('localhost','root','','pass_system');
-                $userpass = mysqli_query($mysql, "SELECT * FROM `users`"); 
-                $userpass = mysqli_fetch_all($userpass);
+            <h3 style="text-align:center;">Заполнение основной инофрмации</h3><br>
+            <form action="checkcar.php" method="post" style="margin: 0 auto;" >
 
-                foreach ($userpass as $pass){
-                    ?>
-                    <tr>        
-                        <td style="font-size:20px;"><?= $pass[0]?></td>
-                        <td style="font-size:20px;"><?= $pass[1]?> </td>
-                        <td style="font-size:20px;"><?= $pass[2]?> </td>
-                        <td style="font-size:20px;"> <?= $pass[4]?> </td>
-                        <td>
-                            <a href="usersform.php?id_user=<?=$pass[3]?>"><img class="" src="img/edit.png" alt="" ></a>
-                            <a href="deleteuser.php?id_user=<?=$pass[3]?>"><img class="" src="img/trash.png" alt=""></a>
-                        </td>
-                    </tr>
+                <input type="hidden" class="form-control" name="id_user" value="<?php echo $_COOKIE['id_user']; ?>">
 
-                    <?php
-                }
-            ?>
-        </tbody>        
-        </table>
+                <label for="num_car">Гос. номер авто*</label>
+                <input type="text" class="form-control"  name="num_car" id="num_car" required placeholder="А000АА"><br>
+
+                <label for="data_time">Ожидаемая дата и время*</label>
+                <input type="datetime-local" class="form-control" name="data_time" id="data_time" required><br>
+
+                <label for="full_name">Ваше ФИО*</label>
+                <input type="text" class="form-control" name="full_name" id="full_name" required placeholder="Иванов Иван Иванович"><br>
+
+                <button class="btn btn-success" type="submit" >Создать заявку</button>
+            </form>
         </main>
     </div>
-    <?php require "header.php" ?>
-    <div class="container mt-4">
-        <h3 style="text-align:center;">Заполнение основной инофрмации</h3><br>
-        <form action="checkcar.php" method="post" style="margin: 0 auto;" >
-
-            <input type="hidden" class="form-control" name="id_user" value="<?php echo $_COOKIE['id_user']; ?>">
-
-            <label for="num_car">Гос. номер авто*</label>
-            <input type="text" class="form-control"  name="num_car" id="num_car" required placeholder="А000АА"><br>
-
-            <label for="data_time">Ожидаемая дата и время*</label>
-            <input type="datetime-local" class="form-control" name="data_time" id="data_time" required><br>
-
-            <label for="full_name">Ваше ФИО*</label>
-            <input type="text" class="form-control" name="full_name" id="full_name" required placeholder="Иванов Иван Иванович"><br>
-
-            <button class="btn btn-success" type="submit">Создать заявку</button>
-        </form>
-    </div>
-    <?php require "footer.php" ?>
 </body>
 </html>    
