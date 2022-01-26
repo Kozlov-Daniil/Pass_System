@@ -43,7 +43,7 @@ def start(message):
 	cursor.execute(f"SELECT id_telegramm FROM users WHERE id_telegramm = {people_id}")
 	data = cursor.fetchone()
 	if data is None:
-		msg = bot.send_message(message.chat.id, "Введите ФИО")
+		msg = bot.send_message(message.chat.id, "Введите ФИО, номер телефона и номер участка (каждое поле через пробел)")
 		bot.register_next_step_handler(msg, process_name_step)
 
 	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
@@ -62,42 +62,25 @@ def start(message):
 		)
 
 		
-		
-
 def process_name_step(message):
-	try:
-		id_telegramm = message.from_user.id
-		user_data[id_telegramm] = User(message.text)
+	id_telegramm = message.from_user.id
+	user_data[id_telegramm] = User(message.text)
+	name = message.text
 
-		msg = bot.send_message(message.chat.id, "Введите номер телефона")
-		bot.register_next_step_handler(msg, process_phonenumber_step)
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка')
-
-def process_phonenumber_step(message):
+	name=name.strip().split(".")
 	try:
-		id_telegramm = message.from_user.id
-		user= user_data[id_telegramm]
-		if message.text.isnumeric():
-			user.phonenumber = message.text 
-			msg = bot.send_message(message.chat.id, "Введите номер участка")
-			bot.register_next_step_handler(msg, process_lotnumber_step)
-		else:
-			msg = bot.send_message(message.chat.id, "Ошибка ввода")
-			bot.send_message(message.chat.id, 'Повторите попытку (вводите только цифры)')
-			bot.register_next_step_handler(msg, process_phonenumber_step)
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка')
-			
 
-def process_lotnumber_step(message):
-	try:
+		f = {}
+		for o,k in enumerate(name,1):
+		    f["string{0}".format(o)]=k
+
+
+
 		id_telegramm = message.from_user.id
 		user = user_data[id_telegramm]
-		user.lotnumber = message.text
 
 		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, NULL)"
-		val = (user.name, user.phonenumber, user.lotnumber, id_telegramm)
+		val = (name[0], name[1], name[2], id_telegramm)
 		cursor.execute(sql, val)
 		db.commit()
 
@@ -109,20 +92,16 @@ def process_lotnumber_step(message):
 		markup_inline.add(item_1, item_2)
 		bot.send_message(message.chat.id, 'Меню',
 		reply_markup = markup_inline
-		)
-		
-			
-	except Exception as e:
-		bot.reply_to(message, 'Ошибка или вы уже зарегистрированы')
-	
-		markup_inline = types.InlineKeyboardMarkup()
-		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
-		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+		)			
 
-		markup_inline.add(item_1, item_2)
-		bot.send_message(message.chat.id, 'Меню',
-		reply_markup = markup_inline
-		)
+
+	except:	
+		msg = bot.send_message(message.chat.id, "Что-то пошло не так, повторите попытку ввода")
+		bot.register_next_step_handler(msg, start)
+			
+
+
+
 
 @bot.callback_query_handler(func = lambda call: True)
 def answer(call):
@@ -155,7 +134,7 @@ def process_numcar_step(message):
 			for i,j in enumerate(Car.numcar,1):
 			    d["string{0}".format(i)]=j 
 		except:
-			msg = bot.send_message(call.from_user.id, "Что-то пошло не так, повторите попытку ввода")
+			msg = bot.send_message(message.chat.id, "Что-то пошло не так, повторите попытку ввода")
 			bot.register_next_step_handler(msg, process_numcar_step)
 	 
 		
@@ -187,17 +166,9 @@ def process_numcar_step(message):
 		
 			
 	except Exception as e:
-		bot.reply_to(message, 'Ошибка подачи заявки')
+		msg = bot.send_message(call.from_user.id, "Что-то пошло не так, повторите попытку ввода")
+		bot.register_next_step_handler(msg, process_numcar_step)
 		
-	markup_inline = types.InlineKeyboardMarkup()
-	item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
-	item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
-
-	markup_inline.add(item_1, item_2)
-	bot.send_message(message.chat.id, 'Меню',
-	reply_markup = markup_inline
-	)
-
 
 
 
