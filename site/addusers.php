@@ -87,22 +87,24 @@
         <tbody>   
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
-                $userpass = mysqli_query($mysql, "SELECT * FROM `users`"); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `users` WHERE `approved` IS NULL"); 
                 $userpass = mysqli_fetch_all($userpass);
-
-                foreach ($userpass as $pass){
+                foreach ($userpass as $userpass){
                     ?>
-                    <tr>        
-                        <td style="font-size:20px;"><?= $pass[0]?></td>
-                        <td style="font-size:20px;"><?= $pass[1]?> </td>
-                        <td style="font-size:20px;"><?= $pass[2]?> </td>
-                        <td style="font-size:20px;"> <?= $pass[4]?> </td>
+                    <tr>
+                        <form action="userapproval.php" method="post">
+                        <input type="hidden" class="form-control" name="id_user" value="<?=$userpass[3]?>">  
+                        <input type="hidden" class="form-control" name="form-type" value="addusers">         
+                        <td style="font-size:20px;"><?= $userpass[0]?></td>
+                        <td style="font-size:20px;"><?= $userpass[1]?> </td>
+                        <td style="font-size:20px;"><?= $userpass[2]?> </td>
+                        <td style="font-size:20px;"> <?= $userpass[4]?> </td>
                         <td>
                             <input type="submit" name="button" value = "Добавить" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; margin-top: 10px; font-size:18px;"><br>
                             <input type="submit" name="button" value = "Отменить" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:18px; margin-top: 10px;">
                         </td>
                     </tr>
-
+                    </form>  
                     <?php
                 }
             ?>
@@ -113,3 +115,5 @@
 
 </body>
 </html>
+
+          

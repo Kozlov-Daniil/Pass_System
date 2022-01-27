@@ -7,7 +7,6 @@
     if ($_POST['form-type'] == 'autopark'){
         if ($_POST['button'] == 'Машина приехала'){
             mysqli_query($mysql, "UPDATE `reg_car` SET `status` = 'На парковке' WHERE `reg_car`.`id` = '$id'");
-           // var_dump($zapros);
             
 
         } else if ($_POST['button'] == 'Отмена'){
