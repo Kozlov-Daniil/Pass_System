@@ -43,23 +43,24 @@ def start(message):
 	cursor.execute(f"SELECT id_telegramm FROM users WHERE id_telegramm = {people_id}")
 	data = cursor.fetchone()
 	if data is None:
-		msg = bot.send_message(message.chat.id, "Введите ФИО, номер телефона и номер участка (каждое поле через пробел)")
+		msg = bot.send_message(message.chat.id, "Введите ФИО, номер телефона и номер участка (каждое поле через точку)")
 		bot.register_next_step_handler(msg, process_name_step)
 
-	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
-	approved = cursor.fetchone()
-	if approved is None:
-		pass
-	elif not None:
+	else:
+		cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
+		approved = cursor.fetchone()
+		if approved is None:
+			bot.send_message(message.chat.id, "Ожидайте подтверждения аккаунта")
+		else:
 
-		markup_inline = types.InlineKeyboardMarkup()
-		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
-		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+			markup_inline = types.InlineKeyboardMarkup()
+			item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+			item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
 
-		markup_inline.add(item_1, item_2)
-		bot.send_message(message.chat.id, 'Меню',
-		reply_markup = markup_inline
-		)
+			markup_inline.add(item_1, item_2)
+			bot.send_message(message.chat.id, 'Меню',
+			reply_markup = markup_inline
+			)
 
 		
 def process_name_step(message):
@@ -69,35 +70,39 @@ def process_name_step(message):
 
 	name=name.strip().split(".")
 	try:
-
+		l=0
 		f = {}
 		for o,k in enumerate(name,1):
 		    f["string{0}".format(o)]=k
+		    l+=1
 
-
-
-		id_telegramm = message.from_user.id
 		user = user_data[id_telegramm]
+		if l == 3:
 
-		sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, NULL)"
-		val = (name[0], name[1], name[2], id_telegramm)
-		cursor.execute(sql, val)
-		db.commit()
+			sql = "INSERT INTO users (name, phone_number, lot_number, id_telegramm, approved) VALUES (%s, %s, %s, %s, NULL)"
+			val = (name[0], name[1], name[2], id_telegramm)
+			cursor.execute(sql, val)
+			db.commit()
 
-		bot.send_message(message.chat.id, "Регистрация завершена, ожидайте подтверждения учётной записи")
-		markup_inline = types.InlineKeyboardMarkup()
-		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
-		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+			bot.send_message(message.chat.id, "Регистрация завершена, ожидайте подтверждения учётной записи")
+			markup_inline = types.InlineKeyboardMarkup()
+			item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+			item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
 
-		markup_inline.add(item_1, item_2)
-		bot.send_message(message.chat.id, 'Меню',
-		reply_markup = markup_inline
-		)			
+			markup_inline.add(item_1, item_2)
+			bot.send_message(message.chat.id, 'Меню',
+			reply_markup = markup_inline
+			)	
+		else:
+			msg = bot.send_message(message.chat.id, "Что-то пошло не так, повторите попытку ввода")
+			bot.register_next_step_handler(msg, process_name_step)
 
 
 	except:	
 		msg = bot.send_message(message.chat.id, "Что-то пошло не так, повторите попытку ввода")
 		bot.register_next_step_handler(msg, start)
+			
+
 			
 
 
