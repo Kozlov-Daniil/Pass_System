@@ -2,14 +2,22 @@
 <?php
     $phone_number = filter_var(trim($_POST['phone_number']), FILTER_SANITIZE_STRING);
     $id_telegramm = filter_var(trim($_POST['id_telegramm']), FILTER_SANITIZE_STRING);
+    // $approved = filter_var(trim($_POST['approved']), FILTER_SANITIZE_STRING);
 
     $mysql = new mysqli('localhost','root','','pass_system');
     
     $result = $mysql->query("SELECT * FROM `users` WHERE `phone_number`='$phone_number' AND `id_telegramm`='$id_telegramm'");
     $user = $result->fetch_assoc();
+    
+    if($user == NULL){
 
-    if(count($user) == 0){
         echo "Такой пользователь не найден";
+        header('Location: autherror.php');
+        exit(); 
+    }
+    elseif ($user["approved"] == NULL) {
+
+        header('Location: expectation.php');
         exit();
     }
 
@@ -22,3 +30,7 @@
     header('Location: index.php');
     
 ?>
+
+
+<!-- header('Location: expectation.php'); -->
+<!-- AND `approved`= 'Одобрено' -->

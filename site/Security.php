@@ -87,7 +87,7 @@
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
 
-                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается'"); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается' AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time`"); 
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
                     ?>
