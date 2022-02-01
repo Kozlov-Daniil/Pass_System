@@ -51,6 +51,15 @@ def start(message):
 		approved = cursor.fetchone()
 		if approved is None:
 			bot.send_message(message.chat.id, "Ожидайте подтверждения аккаунта")
+			markup_inline = types.InlineKeyboardMarkup()
+			item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+			item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+
+			markup_inline.add(item_1, item_2)
+			bot.send_message(message.chat.id, 'Меню',
+			reply_markup = markup_inline
+			)
+			db.commit()	
 		else:
 
 			markup_inline = types.InlineKeyboardMarkup()
@@ -103,86 +112,108 @@ def process_name_step(message):
 		bot.register_next_step_handler(msg, start)
 			
 
-			
-
-
-
-
 @bot.callback_query_handler(func = lambda call: True)
 def answer(call):
-	if call.data == '1':
-			msg = bot.send_message(call.from_user.id, "Введите информацию об автомобиле (Номер автомобиля *пробел* марка автомобиля")
-			bot.register_next_step_handler(msg, process_numcar_step)
-	elif call.data == '2':
-		pass
-def process_numcar_step(message):
-	Car.numcar = message.text
-	people_id = message.chat.id 
-	Car.numcar=Car.numcar.strip().split(" ")
+	people_id = call.from_user.id 
 	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
 	approved = cursor.fetchone()
 	if approved is None:
-		
-		msg = bot.send_message(message.chat.id, "Аккаунт не подтверждён")
+		bot.send_message(call.from_user.id, "Ожидайте подтверждения аккаунта")
 		markup_inline = types.InlineKeyboardMarkup()
 		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
 		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+		markup_inline.add(item_1, item_2)
+		bot.send_message(call.from_user.id, 'Меню',
+		reply_markup = markup_inline
+		)
+		db.commit()	
+	else:
+		if call.data == '1':
+				msg = bot.send_message(call.from_user.id, "Введите информацию об автомобиле (Номер автомобиля *пробел* марка автомобиля")
+				bot.register_next_step_handler(msg, process_numcar_step)
+		elif call.data == '2':
+				msg = bot.send_message(call.from_user.id, "https://site.ru")
+				bot.register_next_step_handler(msg, start)
+def process_numcar_step(message):
+	people_id = message.chat.id 
+	Car.numcar = message.text
+	Car.numcar=Car.numcar.strip().split(" ")
+	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
+	approved = cursor.fetchone()
 
+	people_id = message.chat.id 
+	Car.numcar = message.text
+	Car.numcar=Car.numcar.strip().split(" ")
+	cursor.execute(f"SELECT approved FROM users WHERE id_telegramm = {people_id} AND approved = 0")
+	approved = cursor.fetchone()
+	
+	if approved is None:	
+		msg = bot.send_message(message.chat.id, "Аккаунт не подтверждён, ожидайте подтверждения")
+		markup_inline = types.InlineKeyboardMarkup()
+		item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+		item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
 		markup_inline.add(item_1, item_2)
 		bot.send_message(message.chat.id, 'Меню',
 		reply_markup = markup_inline
 		)
+		db.commit()	
 	elif not None:	
 		try:
-
+			b=0
 			d = {}
 			for i,j in enumerate(Car.numcar,1):
 			    d["string{0}".format(i)]=j 
+			    b+=1
 		except:
 			msg = bot.send_message(message.chat.id, "Что-то пошло не так, повторите попытку ввода")
-			bot.register_next_step_handler(msg, process_numcar_step)
-	 
-		
+			bot.register_next_step_handler(msg, answer)
+	if b != 2:
+		msg = bot.send_message(message.chat.id, "Данные введены неверно, повторите попытку")
+		bot.register_next_step_handler(message, process_numcar_step)
+	elif b == 2:
 		people_id = message.chat.id
 		datanow = datetime.datetime.now()
-	try:
-		cursor.execute(f"SELECT name FROM users WHERE id_telegramm = {people_id}")
-		sql2 = cursor.fetchone()
-		cursor.execute(f"SELECT phone_number FROM users WHERE id_telegramm = {people_id}")
-		sql3 = cursor.fetchone()
-		cursor.execute(f"SELECT lot_number FROM users WHERE id_telegramm = {people_id}")
-		lotnumber = cursor.fetchone()
-		sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, comment) VALUES (%s, %s, %s, %s, NULL)"
-		val2 = (people_id, Car.numcar[0], Car.numcar[1], datanow,)
-		print (val2)
-		cursor.execute( sql, val2)
-		sql4 = "UPDATE reg_car SET full_name = %s"
-		val3 = (sql2)
-		cursor.execute(sql4, val3)
-		sql5 = "UPDATE reg_car SET phone_numbers = %s"
-		val4 = (sql3)
-		cursor.execute(sql5, val4)
-		sql6 = "UPDATE reg_car SET address = %s"
-		val5 = (lotnumber)
-		cursor.execute(sql6, val5)
-		db.commit()
+		try:
+			cursor.execute(f"SELECT name FROM users WHERE id_telegramm = {people_id}")
+			sql2 = cursor.fetchone()
+			cursor.execute(f"SELECT phone_number FROM users WHERE id_telegramm = {people_id}")
+			sql3 = cursor.fetchone()
+			cursor.execute(f"SELECT lot_number FROM users WHERE id_telegramm = {people_id}")
+			lotnumber = cursor.fetchone()
+			sql = "INSERT INTO reg_car (id_user, num_car, add_info, data_time, comment, status) VALUES (%s, %s, %s, %s, NULL, 'Ожидается')"
+			val2 = (people_id, Car.numcar[0], Car.numcar[1], datanow)
+			print (val2)
+			cursor.execute( sql, val2)
+			sql4 = "UPDATE reg_car SET full_name = %s"
+			val3 = (sql2)
+			cursor.execute(sql4, val3)
+			sql5 = "UPDATE reg_car SET phone_numbers = %s"
+			val4 = (sql3)
+			cursor.execute(sql5, val4)
+			sql6 = "UPDATE reg_car SET address = %s"
+			val5 = (lotnumber)
+			cursor.execute(sql6, val5)
+			db.commit()
+			bot.send_message(message.chat.id, "Ваша заявка принята")
+			markup_inline = types.InlineKeyboardMarkup()
+			item_1 = types.InlineKeyboardButton(text = 'Подача заявки', callback_data = '1')
+			item_2 = types.InlineKeyboardButton(text = 'Сайт', callback_data = '2')
+			markup_inline.add(item_1, item_2)
+			bot.send_message(message.chat.id, 'Меню',
+			reply_markup = markup_inline
+			)
 
-		bot.send_message(message.chat.id, "Ваша заявка принята")
 		
-			
-	except Exception as e:
-		msg = bot.send_message(call.from_user.id, "Что-то пошло не так, повторите попытку ввода")
-		bot.register_next_step_handler(msg, process_numcar_step)
-		
+		except Exception as e:
+			bot.send_message(message.chat.id, "Ошибка отправки данных, повторите ввод")
+			bot.register_next_step_handler(message, process__numcar_step)
+	
 
+	
 
 
 
 
 bot.enable_save_next_step_handlers(delay=2)
-
 bot.load_next_step_handlers()
-
-
-
 bot.polling(none_stop = True, interval = 0)
