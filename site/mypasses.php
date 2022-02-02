@@ -23,7 +23,8 @@
         </thead>
         <tbody>   
             <?php
-                $mysql = new mysqli('localhost','root','','pass_system');
+                $mysql = mysqli_connect('localhost','root','','pass_system');
+                mysqli_set_charset($mysql, 'utf8');
                 $id_user = $_COOKIE['id_user'];
                 $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `id_user` = $id_user"); 
                 $userpass = mysqli_fetch_all($userpass);

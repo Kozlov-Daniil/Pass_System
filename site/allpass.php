@@ -23,8 +23,10 @@
         </thead>
         <tbody>   
             <?php
-                $mysql = new mysqli('localhost','root','','pass_system');
-                
+
+                // $mysql = new mysqli('localhost','root','','pass_system');
+                $mysql = mysqli_connect('localhost','root','','pass_system');
+                mysqli_set_charset($mysql, 'utf8');
                 $allusers = mysqli_query($mysql, "SELECT * FROM `users`"); 
                 $allusers = mysqli_fetch_all($allusers);
                 foreach ($allusers as $allusers){

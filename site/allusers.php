@@ -86,7 +86,8 @@
         </thead>
         <tbody>   
             <?php
-                $mysql = new mysqli('localhost','root','','pass_system');
+                $mysql = mysqli_connect('localhost','root','','pass_system');
+                mysqli_set_charset($mysql, 'utf8');
                 $userpass = mysqli_query($mysql, "SELECT * FROM `users` WHERE `approved` = 'Одобрено' "); 
                 $userpass = mysqli_fetch_all($userpass);
 

@@ -4,7 +4,8 @@
     $id_telegramm = filter_var(trim($_POST['id_telegramm']), FILTER_SANITIZE_STRING);
     // $approved = filter_var(trim($_POST['approved']), FILTER_SANITIZE_STRING);
 
-    $mysql = new mysqli('localhost','root','','pass_system');
+    $mysql = mysqli_connect('localhost','root','','pass_system');
+    mysqli_set_charset($mysql, 'utf8');
     
     $result = $mysql->query("SELECT * FROM `users` WHERE `phone_number`='$phone_number' AND `id_telegramm`='$id_telegramm'");
     $user = $result->fetch_assoc();

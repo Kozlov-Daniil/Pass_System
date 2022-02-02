@@ -10,7 +10,8 @@
 
 
 
-    $mysql = new mysqli('localhost','root','','pass_system');
+    $mysql = mysqli_connect('localhost','root','','pass_system');
+    mysqli_set_charset($mysql, 'utf8');
 
     $mysql->query("INSERT INTO `reg_car` (`id_user`, `num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_numbers`, `comment`) VALUES ( '$id_user','$num_car', '$add_info', '$data_time', '$address', '$full_name', '$phone_numbers', '$comment')");
 

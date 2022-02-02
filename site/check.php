@@ -5,7 +5,8 @@
     $id_telegramm = filter_var(trim($_POST['id_telegramm']), FILTER_SANITIZE_STRING);
 
 
-    $mysql = new mysqli('localhost','root','','pass_system');
+    $mysql = mysqli_connect('localhost','root','','pass_system');
+    mysqli_set_charset($mysql, 'utf8');
     $mysql->query("INSERT INTO `users` (`name`, `phone_number`, `lot_number`, `id_telegramm`) VALUES ('$name', '$phone_number', '$lot_number', '$id_telegramm')");
 
 

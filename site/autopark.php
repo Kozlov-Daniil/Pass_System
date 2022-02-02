@@ -1,6 +1,7 @@
 <?php
     
-    $mysql = new mysqli('localhost','root','','pass_system');
+    $mysql = mysqli_connect('localhost','root','','pass_system');
+    mysqli_set_charset($mysql, 'utf8');
 
     $id = $_POST['id'];
 

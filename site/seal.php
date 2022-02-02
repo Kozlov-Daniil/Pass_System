@@ -87,7 +87,8 @@
             </thead>
             <tbody>   
                 <?php
-                    $mysql = new mysqli('localhost','root','','pass_system');
+                    $mysql = mysqli_connect('localhost','root','','pass_system');
+                    mysqli_set_charset($mysql, 'utf8');
                     
                     $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE (`status` = 'Завершена' OR `status` = 'Отменена') AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time` DESC"); 
                     $userpass = mysqli_fetch_all($userpass);
