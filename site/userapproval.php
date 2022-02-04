@@ -7,11 +7,11 @@
     if ($_POST['form-type'] == 'addusers'){
 
         if ($_POST['button'] == 'Добавить'){
-            mysqli_query($mysql, "UPDATE `users` SET `approved` = 'Одобрено' WHERE `users`.`id_user` =  '$id_user'");
+            mysqli_query($mysql, "UPDATE `users` SET `approved` = '1' WHERE `users`.`id_user` =  '$id_user'");
             
 
-        } else if ($_POST['button'] == 'Отменить'){
-            mysqli_query($mysql, "DELETE FROM `users` WHERE `users`.`id_user` = '$id_user'");  
+        } else if ($_POST['button'] == 'Бан'){
+            mysqli_query($mysql, "UPDATE `users` SET `approved` = '2' WHERE `users`.`id_user` =  '$id_user'");  
                      
         }
         

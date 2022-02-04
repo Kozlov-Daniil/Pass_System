@@ -2,6 +2,7 @@
 <?php
     $phone_number = filter_var(trim($_POST['phone_number']), FILTER_SANITIZE_STRING);
     $id_telegramm = filter_var(trim($_POST['id_telegramm']), FILTER_SANITIZE_STRING);
+
     // $approved = filter_var(trim($_POST['approved']), FILTER_SANITIZE_STRING);
 
     $mysql = mysqli_connect('localhost','root','','pass_system');
@@ -11,7 +12,6 @@
     $user = $result->fetch_assoc();
     
     if($user == NULL){
-
         echo "Такой пользователь не найден";
         header('Location: autherror.php');
         exit(); 
@@ -21,17 +21,27 @@
         header('Location: expectation.php');
         exit();
     }
+    else{
+        $apiToken = "2141779356:AAEancJzWsHSh0Js_62mLGTocwSEOkDJq-E";
+        $data = [
+             'chat_id' => $id_telegramm, 
+             'text' => "Здравствуйте! Ваша регистрация подтверждена! Теперь вы можете оформлять пропуска для въезда автомобилей на территорию посёлка. Для заказа пропуска ввердите номер и марку машины"
+            ];
+        
+        $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?".http_build_query($data));    
+    }
+    
 
     setcookie('user', $user['name'], time() + 3600, "/");
 
     setcookie('id_user', $user['id_user'], time() + 3600, "/");
 
+    header("Location: $response");
+    
     $mysql->close();
 
-    header('Location: index.php');
+    
     
 ?>
 
 
-<!-- header('Location: expectation.php'); -->
-<!-- AND `approved`= 'Одобрено' -->

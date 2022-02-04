@@ -49,7 +49,7 @@
                         <td style="font-size:20px;"> <?= $userpass[4]?> </td>
                         <td>
                             <input type="submit" name="button" value = "Добавить" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; margin-top: 10px; font-size:18px;"><br>
-                            <input type="submit" name="button" value = "Отменить" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:18px; margin-top: 10px;">
+                            <input type="submit" name="button" value = "Бан" style="color:white; background-color: red; border:none; padding: 7px; border-radius: 5px; font-size:18px; margin-top: 10px;">
                         </td>
                     </tr>
                     </form>  
