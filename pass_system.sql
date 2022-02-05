@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Янв 31 2022 г., 01:14
+-- Время создания: Фев 05 2022 г., 22:16
 -- Версия сервера: 10.4.14-MariaDB
--- Версия PHP: 7.4.10
+-- Версия PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,34 +33,23 @@ CREATE TABLE `reg_car` (
   `num_car` varchar(12) NOT NULL,
   `add_info` varchar(255) NOT NULL,
   `data_time` datetime NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `phone_numbers` decimal(11,0) NOT NULL,
-  `comment` varchar(255) NOT NULL,
-  `status` varchar(64) NOT NULL DEFAULT 'Ожидается',
-  `approved` int(12) DEFAULT NULL
+  `comment` varchar(255) DEFAULT NULL,
+  `status` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `reg_car`
 --
 
-INSERT INTO `reg_car` (`id`, `id_user`, `num_car`, `add_info`, `data_time`, `address`, `full_name`, `phone_numbers`, `comment`, `status`, `approved`) VALUES
-(24, 59, 'A123AВ', 'Желтая машина', '2021-12-26 00:09:00', 'dszdsczdzs', 'Иванова Иван Иванович', '79812311223', 'Я хочу заехать', 'На парковке', NULL),
-(27, 13, 'П100ПВ', 'Синяя машина', '2021-12-21 00:32:00', 'фывфывфывфыв', 'Серый Сергей Сергеевич', '78945612345', 'Я хочу заехать', 'Завершена', NULL),
-(28, 13, 'П100ПП', 'Зеленая машина', '2021-12-21 00:32:00', 'фывфывфывфыв', 'Серый Сергей Сергеевич', '78945612345', 'Я хочу заехать', 'Завершена', NULL),
-(30, 13, 'A123AA', 'фывфывфы', '2022-01-21 11:12:00', 'фывфывфыв', 'Иванова Иван Иванович', '78945612345', ' Я хочу заехать', 'Завершена', NULL),
-(32, 59, 'A123AA', 'Синяя машина', '2022-01-21 11:13:00', 'fghfhkjkj', 'Серый Сергей Сергеевич', '79812311223', ' sdfgsdfg', 'На парковке', NULL),
-(33, 61, 'П100КК', 'Красная машина', '2022-01-25 07:16:00', 'rsdfgh', 'Серый Сергей Сергеевич', '79812311223', ' Я хочу заехать', 'Ожидается', NULL),
-(35, 13, 'П100ПП', 'Красная машина', '2022-01-24 23:19:00', 'ваыпываыва', 'Серый Сергей Сергеевич', '79812311223', ' Я хочу заехать', 'На парковке', NULL),
-(36, 0, 'П100ПП', 'Синяя машина', '2022-01-23 23:21:00', 'ыфв', 'Иванова Иван Иванович', '79812311223', ' Я хочу заехать', 'Завершена', NULL),
-(37, 61, 'П100ПП', '', '2022-01-23 23:23:00', '', 'Валерий Иванов Валерьевич', '0', '', 'Завершена', NULL),
-(38, 0, 'ASDAS123', '', '2022-01-13 00:53:00', '', 'Валерий Иванов Валерьевич', '0', '', 'Завершена', NULL),
-(39, 61, 'asdas', 'Синяя машина', '2022-01-26 06:15:00', 'фывфыв', 'Иванова Иван Иванович', '79812311223', ' ', 'Ожидается', NULL),
-(40, 61, 'A123AA', '', '2022-01-02 01:04:00', '', 'Валерий Иванов Валерьевич', '0', '', 'Отменена', NULL),
-(41, 61, 'A123AA', '', '2022-01-25 05:41:00', '', 'Валерий Иванов Валерьевич', '0', '', 'Отменена', NULL),
-(42, 61, 'фывфыв', '', '2022-01-28 05:46:00', '', 'Сергей', '0', '', 'Отменена', NULL),
-(43, 0, 'П100ПП', 'Синяя машина', '2022-01-25 06:21:00', 'Csaqwsad', 'Серый Сергей Сергеевич', '99999999999', ' ', 'Ожидается', NULL);
+INSERT INTO `reg_car` (`id`, `id_user`, `num_car`, `add_info`, `data_time`, `comment`, `status`) VALUES
+(98, 865231654, 'daw', 'dwa', '2022-02-02 01:02:42', NULL, 'Ожидается'),
+(99, 865231654, 'dwa', 'daw', '2022-02-02 01:23:11', NULL, 'Ожидается'),
+(100, 865231654, 'awd', 'dwa', '2022-02-02 01:28:34', NULL, 'Ожидается'),
+(101, 865231654, 'dwa', 'da', '2022-02-02 01:36:53', NULL, 'Ожидается'),
+(102, 865231654, 'dw', 'adaw', '2022-02-02 01:38:28', NULL, 'Ожидается'),
+(103, 865231654, 'dwa', 'dwa', '2022-02-02 01:38:55', NULL, 'Ожидается'),
+(104, 865231654, 'вцф', 'вфц', '2022-02-02 01:40:27', NULL, 'Ожидается'),
+(105, 865231654, '312', '312', '2022-02-03 00:57:50', NULL, 'Ожидается');
 
 -- --------------------------------------------------------
 
@@ -70,11 +59,11 @@ INSERT INTO `reg_car` (`id`, `id_user`, `num_car`, `add_info`, `data_time`, `add
 
 CREATE TABLE `users` (
   `name` varchar(255) DEFAULT NULL,
-  `phone_number` decimal(11,0) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
   `lot_number` varchar(255) DEFAULT NULL,
   `id_user` int(11) NOT NULL,
   `id_telegramm` int(11) DEFAULT NULL,
-  `approved` varchar(12) DEFAULT NULL
+  `approved` int(2) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -82,11 +71,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`name`, `phone_number`, `lot_number`, `id_user`, `id_telegramm`, `approved`) VALUES
-('Иванов Иван Иванович', '79812311223', 'Ул. Красная д.10 кв. 55', 13, 533873246, 'Одобрено'),
-('Евгений', '79654321111', 'Ул Длинная дом 10 кв 60', 59, 214748364, 'Одобрено'),
-('Васильев Владимир Викторович', '78945612345', 'Ул Длинная дом 12 кв 11', 60, 83523165, 'Одобрено'),
-('Охрана', '79176524509', 'Ул Длинная дом', 61, 111222112, 'Одобрено'),
-('Антон', '89176524508', 'Ул Длинная дом 10 кв 54', 73, 533873224, 'Одобрено');
+('Иванов Иван Иванович', '79812311223', 'Ул. Красная д.10 кв. 55', 13, 533873246, 0),
+('Козлов Даниил Анатольевич', '+7 902 722-07-28', '123', 152, 865231654, 2);
 
 --
 -- Индексы сохранённых таблиц
@@ -96,8 +82,7 @@ INSERT INTO `users` (`name`, `phone_number`, `lot_number`, `id_user`, `id_telegr
 -- Индексы таблицы `reg_car`
 --
 ALTER TABLE `reg_car`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `id_user` (`id_user`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Индексы таблицы `users`
@@ -114,13 +99,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `reg_car`
 --
 ALTER TABLE `reg_car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
