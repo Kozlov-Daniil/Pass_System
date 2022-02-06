@@ -33,8 +33,7 @@
             <?php
                 $mysql = mysqli_connect('localhost','root','','pass_system');
                 mysqli_set_charset($mysql, 'utf8');
-                
-                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'На парковке' AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time` DESC"); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'На парковке' AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time` DESC");
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
                     ?>

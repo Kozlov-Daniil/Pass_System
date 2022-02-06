@@ -9,6 +9,7 @@
             <li class="nav-item"><a href="index.php" class="nav-link link-dark px-2 active" aria-current="page">Главная</a></li>
             <li class="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
             <li class="nav-item"><a href="allpass.php" class="nav-link link-dark px-2">Пользватели(демо)</a></li>
+            <li class="nav-item"><a href="addusers.php" class="nav-link link-dark px-2 active" aria-current="page">Одобрение пользователя</a></li>
 
         </ul>
         <ul class="nav">
@@ -16,6 +17,7 @@
             <li class="nav-item"><a href="reg.php" class="nav-link link-dark px-2">Sign up</a></li>
         </ul>
         </div>
+
 </nav>
 
 <?php else: ?>

@@ -35,7 +35,7 @@
             <?php
                 $mysql = mysqli_connect('localhost','root','','pass_system');
                 mysqli_set_charset($mysql, 'utf8');
-                $userpass = mysqli_query($mysql, "SELECT * FROM `users` WHERE `approved` = 'Одобрено' "); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `users` WHERE `approved` = '1'"); 
                 $userpass = mysqli_fetch_all($userpass);
 
                 foreach ($userpass as $pass){
