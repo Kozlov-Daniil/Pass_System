@@ -17,7 +17,7 @@
         exit(); 
     }
     elseif ($user["approved"] == 0) {
-        
+
         header('Location: expectation.php');
         exit();
     }
@@ -39,7 +39,7 @@
 
     setcookie('id_user', $user['id_user'], time() + 3600, "/");
 
-    header("Location: $response");
+    header("Location: access.php");
     
     $mysql->close();
 

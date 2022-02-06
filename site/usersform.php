@@ -1,8 +1,9 @@
 <?php 
-    error_reporting(0);
+    
 ?>
 <?php
-    $mysql = new mysqli('localhost','root','','pass_system');
+   $mysql = mysqli_connect('localhost','root','','pass_system');
+   mysqli_set_charset($mysql, 'utf8');
 
     $userpass_id = $_GET['id_user'];
     $userpass = mysqli_query($mysql, "SELECT * FROM `users` WHERE `id_user` = '$userpass_id'");
@@ -20,7 +21,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <?//php require "header.php" ?>
     <div class="container mt-4">
         <h3 style="text-align:center;">Заполнение основной инофрмации</h3><br>
         <form action="usercheck.php" method="post" style="margin: 0 auto;" >
@@ -43,6 +43,5 @@
             <button class="btn btn-success" type="submit">Обновить</button>
         </form>
     </div>
-    <?//php require "footer.php" ?>
 </body>
 </html>

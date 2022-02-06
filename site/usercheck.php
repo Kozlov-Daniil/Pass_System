@@ -6,10 +6,11 @@
     $id_telegramm = filter_var(trim($_POST['id_telegramm']), FILTER_SANITIZE_STRING);
 
 
-    $mysql = new mysqli('localhost','root','','pass_system');
+    $mysql = mysqli_connect('localhost','root','','pass_system');
+    mysqli_set_charset($mysql, 'utf8');
 
-    mysqli_query($mysql, "UPDATE `users` SET `id_user` = '$id_user', `name` = '$name', `phone_number` = ' $phone_number', `lot_number` = '$lot_number', `id_telegramm` = '$id_telegramm',  WHERE `users`.`id_user` = '$id_user'");
+    mysqli_query($mysql, "UPDATE `users` SET `id_user` = '$id_user', `name` = '$name', `phone_number` = ' $phone_number', `lot_number` = '$lot_number', `id_telegramm` = '$id_telegramm' WHERE `users`.`id_user` = '$id_user'");
     
-    header('Location: allusers.php')
+    header('Location: allusers.php');
 
 ?>

@@ -25,6 +25,7 @@
             <tr>
                 <th style="font-size:22px;">Статус</th>
                 <th style="font-size:22px;">Автомобиль</th>
+                <th style="font-size:22px;">Доп. информация</th>
                 <th style="font-size:22px;">Адрес и заявитель</th>
                 <th style="font-size:22px;">Ожидаемая дата</th>
                 <th style="font-size:22px;">Действия</th>
@@ -34,7 +35,9 @@
             <?php
                 $mysql = new mysqli('localhost','root','','pass_system');
 
-                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается' AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time`"); 
+                $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается'"); 
+                // $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается' AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time`"); 
+
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
                     ?>
@@ -42,8 +45,9 @@
                         <form action="autopark.php" method="post">
                         <input type="hidden" class="form-control" name="id" value="<?=$userpass[0]?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
-                        <td style="font-size:20px;"><button type="button" class="btn btn-danger" style="font-size:18px;"><?= $userpass[9]?></button></td>
-                        <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
+                        <td style="font-size:20px;"><button type="button" class="btn btn-danger" style="font-size:18px;"><?= $userpass[6]?></button></td>
+                        <td style="font-size:20px;"><?= $userpass[2]?></td>
+                        <td style="font-size:20px;"><?= $userpass[3]?></td>
                         <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
                         <td style="font-size:20px;"><?= $userpass[4]?></td>
                         <td style="font-size:20px;">

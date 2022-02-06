@@ -26,7 +26,7 @@
             <tr>
                 <th style="font-size:22px;">ФИО</th>
                 <th style="font-size:22px;">Номер телефона</th>
-                <th style="font-size:22px;">Адрес пользователя</th>
+                <th style="font-size:22px;">Номер участка</th>
                 <th style="font-size:22px;">ID Телеграмма</th>
                 <th style="font-size:22px;">Действия</th>
             </tr>
