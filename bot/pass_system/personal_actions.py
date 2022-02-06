@@ -1,14 +1,18 @@
-from aiogram import types
+from aiogram import types, Bot
 from dispatcher import dp
 import config
 import re
 from bot import BotDB
 
+
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
+    markup_inline = types.InlineKeyboardMarkup()
+    item_1 = types.InlineKeyboardButton(text = 'Помощь', callback_data = '1')
+    markup_inline.add(item_1)
     db_result=BotDB.check_user_exists(message.from_user.id);
     if (db_result is None):
-        await message.bot.send_message(message.from_user.id, "Вас приветствует БОТ заказа пропусков!\nДля начала, необходимо зарегистрироваться в системе.\nДля этого введите ФИО, номер телефона и номер участка (через запятую): ")
+        await message.bot.send_message(message.from_user.id, "Вас приветствует БОТ заказа пропусков!\nДля начала, необходимо зарегистрироваться в системе.\nДля этого введите ФИО, номер телефона и номер участка (через запятую): ")       
     else:
         await message.bot.send_message(message.from_user.id, "Здравствуйте, " + str(db_result[0]) + "\nВас приветствует БОТ заказа пропусков! ")
         if (db_result[5] == 0):
@@ -16,38 +20,41 @@ async def start(message: types.Message):
         if (db_result[5] == 2):
             await message.bot.send_message(message.from_user.id, "К сожалению, Вы временно не можете использовать систему заказа пропусков! ")
         if (db_result[5] == 1):
-            await message.bot.send_message(message.from_user.id, "Для заказа пропуска ввердите номер и марку машины! ")
+            await message.bot.send_message(message.from_user.id, "Для заказа пропуска ввердите номер и марку машины! ", reply_markup = markup_inline)
 
-@dp.message_handler(commands=['help'])
-async def help(message: types.Message):
-    db_result=BotDB.check_user_exists(message.from_user.id);
-    if (db_result is None):
-        await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
-            "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n" +
-            "Для начала работы, необходимо зарегистрироваться в системе. Для регистрации необходимо ввести Фамилию Имя Отчество, номер Вашего телефона и номер участка, на котором Вы проживаете.\n\n" +
-            "Например:\n" + 
-            "Иванов Иван Иванович, 89161234567, 777\n\n" +
-            "После подтверждения Администратором Вашей регистрации, Вам поступит соответствующее сообщение, после которого Вы сможете заказывать пропуска для машин Ваших гостей для въезда на территорию посёлка.")
-    if (db_result[5] == 0):
-        await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
-            "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n\n" +
-            "Для подачи заявки вам необходимо дождаться подтверждения администратором вашей регистрации.\n" + 
-            "Вам поступит соответствующее сообщение, после которого вы сможете заказывать пропуска для машин ваших гостей для въезда на территорию посёлка.")
-    if (db_result[5] == 1):
-        await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
-            "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n\n" +
-            "Вы являетесь пользователем с подтверждённой регистрацией.\n"+
-            "Для заказа пропуска введите номер и марку машины.\n\n"+
-            "Напимер:\n"+
-            "А111АА BMW")
-    if (db_result[5] == 2):
-        await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
-            "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n\n" +
-            "На данный момент ваш аккаунт заблокирован и вы не обладаете возможностью подачи заявки.\n"+
-            "Пожалуйста, ожидайте разблокировки аккаунта.")
+@dp.callback_query_handler(lambda call: True)
+async def inline_button1(message: types.Message):   
+        db_result=BotDB.check_user_exists(message.from_user.id);
+        if (db_result is None):
+            await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
+                "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n" +
+                "Для начала работы, необходимо зарегистрироваться в системе. Для регистрации необходимо ввести Фамилию Имя Отчество, номер Вашего телефона и номер участка, на котором Вы проживаете.\n\n" +
+                "Например:\n" + 
+                "Иванов Иван Иванович, 89161234567, 777\n\n" +
+                "После подтверждения Администратором Вашей регистрации, Вам поступит соответствующее сообщение, после которого Вы сможете заказывать пропуска для машин Ваших гостей для въезда на территорию посёлка.")
+        if (db_result[5] == 0):
+            await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
+                "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n\n" +
+                "Для подачи заявки вам необходимо дождаться подтверждения администратором вашей регистрации.\n" + 
+                "Вам поступит соответствующее сообщение, после которого вы сможете заказывать пропуска для машин ваших гостей для въезда на территорию посёлка.")
+        if (db_result[5] == 1):
+            await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
+                "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n\n" +
+                "Вы являетесь пользователем с подтверждённой регистрацией.\n"+
+                "Для заказа пропуска введите номер и марку машины.\n\n"+
+                "Напимер:\n"+
+                "А111АА BMW")
+        if (db_result[5] == 2):
+            await message.bot.send_message( message.from_user.id, "Вас приветствует автоматизированная система заказа пропусков!\n" +
+                "Данная система предназначена для простого заказа пропусков с использованием мессенджера Telegram.\n\n" +
+                "На данный момент ваш аккаунт заблокирован и вы не обладаете возможностью подачи заявки.\n"+
+                "Пожалуйста, ожидайте разблокировки аккаунта.")
 
 @dp.message_handler()
 async def echo_message(message: types.Message):
+    markup_inline = types.InlineKeyboardMarkup()
+    item_1 = types.InlineKeyboardButton(text = 'Помощь', callback_data = '1')
+    markup_inline.add(item_1)
     db_result=BotDB.check_user_exists(message.from_user.id);
     if (db_result is None):
         # новый пользователь: проверка сообщения на формат фио и т п.
@@ -68,7 +75,7 @@ async def echo_message(message: types.Message):
                         await message.bot.send_message(message.chat.id, "Неправильно введёны ФИО.\nВведите ФИО, номер телефона и номер участка (через запятую):")
                     else:
                         if (BotDB.add_user( uname, phone, num, message.from_user.id)): # записываем результат в базу
-                            await message.bot.send_message(message.chat.id, "ФИО: " + uname + "\nТелефон: " + phone + "\nНомер участка: " + num + "\n\nРегистрация завершена, ожидайте подтверждения учётной записи")
+                            await message.bot.send_message(message.chat.id, "ФИО: " + uname + "\nТелефон: " + phone + "\nНомер участка: " + num + "\n\nРегистрация завершена, ожидайте подтверждения учётной записи", reply_markup = markup_inline)
                         else:
                             await message.bot.send_message(message.chat.id, "Ошибка регистрации, попробуйте повторить попытку позднее")
 
