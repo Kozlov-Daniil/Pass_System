@@ -26,6 +26,16 @@
         header('Location: auth.php');
         exit();
     }
+    elseif ($user["approved"] == 1) {
+
+        $apiToken = "2141779356:AAEancJzWsHSh0Js_62mLGTocwSEOkDJq-E";
+        $data = [
+             'chat_id' => $id_telegramm, 
+             'text' => "Здравствуйте, " . $user['name'] . ". Желаете офрмить заявку на въезд?"
+            ];
+        $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?".http_build_query($data));
+    }
+
     else{
         $apiToken = "2141779356:AAEancJzWsHSh0Js_62mLGTocwSEOkDJq-E";
         $data = [
