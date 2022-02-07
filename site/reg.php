@@ -14,10 +14,18 @@
 <div class="container mt-4" >
     <h3 style="text-align:center;">Регистрация</h3><br>
     <form action="check.php" method="post" style="margin: 0 auto;">
-        <input type="text" class="form-control" name="name" id="name" placeholder="Введите Имя"><br>
-        <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Введите телефон"><br>
-        <input type="text" class="form-control" name="lot_number" id="lot_number" placeholder="Введите номер участка"><br>
-        <input type="password" class="form-control" name="id_telegramm" id="id_telegramm" placeholder="Введите ваш id телеграмма"><br>
+
+        <label for="name">Введите ваше ФИО</label>
+        <input type="text" class="form-control" name="name" id="name" required placeholder="Иванов Иван Иванович"><br>
+
+        <label for="num_car">Введите ваш телефон</label>
+        <input type="text" class="form-control" name="phone_number" id="phone_number" required placeholder="79998886655"><br>
+
+        <label for="num_car">Введите номер участка</label>
+        <input type="text" class="form-control" name="lot_number" id="lot_number" required placeholder="Ул. Красная д. 10"><br>
+
+        <label for="num_car">Введите ваш id телеграмма</label>
+        <input type="password" class="form-control" name="id_telegramm" id="id_telegramm" required ><br>
         <div style="text-align:center;">
             <button class="btn btn-secondary" type="submit">Отмена</button>
             <button class="btn btn-success" type="submit">Зарегистрироваться</button>

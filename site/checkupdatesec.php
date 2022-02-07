@@ -13,8 +13,8 @@
     mysqli_set_charset($mysql, 'utf8');
 
 
-    mysqli_query($mysql, "UPDATE `reg_car` SET `num_car` = '$num_car', `add_info` = '$add_info', `data_time` = ' $data_time', `address` = '$address', `full_name` = '$full_name', `phone_numbers` = '$phone_numbers', `comment` = ' $comment' WHERE `reg_car`.`id` = '$id'");
-    
+    mysqli_query($mysql, "UPDATE `reg_car` SET `num_car` = '$num_car', `add_info` = '$add_info', `data_time` = ' $data_time', `comment` = ' $comment' WHERE `reg_car`.`id` = '$id'");
+    // mysqli_query($mysql, "UPDATE `reg_car` SET `num_car` = '$num_car', `add_info` = '$add_info', `data_time` = ' $data_time', `address` = '$address', `full_name` = '$full_name', `phone_numbers` = '$phone_numbers', `comment` = ' $comment' WHERE `reg_car`.`id` = '$id'");
     header('Location: Security.php')
 
 ?>

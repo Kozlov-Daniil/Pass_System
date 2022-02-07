@@ -12,12 +12,14 @@
 <body>
     <?php  require "header.php"?>
     <div class="container mt-4">
+        <h1 style = "text-align:center;">Мои пропуска</h1><br>
         <table class="table">
         <thead class="thead-light">    
             <tr>
                 <th>Статус</th>
                 <th>Номер машины</th>
-                <th>Ожидаемая дата</th>
+                <th>Доп. информация</th>
+                <th>Дата создания заявки</th>
                 <th>Редактирование</th>
             </tr>
         </thead>
@@ -32,8 +34,9 @@
                 foreach ($userpass as $pass){
                     ?>
                     <tr>        
-                        <td><button type="button" class="btn btn-secondary"><?= $pass[9]?></button></td>
+                        <td><button type="button" class="btn btn-secondary"><?= $pass[6]?></button></td>
                         <td><?= $pass[2]?> </td>
+                        <td><?= $pass[3]?> </td>
                         <td><?= $pass[4]?> </td>
                         <td>
                             <a href="update.php?id=<?=$pass[0]?>"><img class="" src="img/edit.png" alt="" ></a>

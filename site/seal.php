@@ -27,8 +27,8 @@
                 <tr>
                     <th style="font-size:22px;">Статус</th>
                     <th style="font-size:22px;">Автомобиль</th>
-                    <th style="font-size:22px;">Адрес и заявитель</th>
-                    <th style="font-size:22px;">Дата и время</th>
+                    <th style="font-size:22px;">Доп информация</th>
+                    <th style="font-size:22px;">Комментарий</th>
                 </tr>
             </thead>
             <tbody>   
@@ -47,9 +47,9 @@
                             <input type="hidden" class="form-control" name="id" value="24?>">  
                             <input type="hidden" class="form-control" name="form-type" value="autopark" > 
                             <td style="font-size:20px;"><button type="button" class="btn btn-secondary" style="font-size:18px;"><?= $userpass[6]?></button></td>
-                            <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
-                            <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
-                            <td style="font-size:20px;"><?= $userpass[4]?></td>
+                            <td style="font-size:20px;"><?= $userpass[2]?></td>
+                            <td style="font-size:20px;"><?= $userpass[3]?></td>
+                            <td style="font-size:20px;"><?= $userpass[5]?></td>
                         </tr>
                         </form> 
                         <?php

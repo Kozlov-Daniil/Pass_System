@@ -25,18 +25,21 @@
             <tr>
                 <th style="font-size:22px;">Статус</th>
                 <th style="font-size:22px;">Автомобиль</th>
-                <th style="font-size:22px;">Доп. информация</th>
-                <th style="font-size:22px;">Адрес и заявитель</th>
-                <th style="font-size:22px;">Ожидаемая дата</th>
+                <th style="font-size:22px;">Доп информация</th>
+                <th style="font-size:22px;">Комментарий</th>
                 <th style="font-size:22px;">Действия</th>
             </tr>
         </thead>
         <tbody>   
             <?php
-                $mysql = new mysqli('localhost','root','','pass_system');
-
+                $mysql = mysqli_connect('localhost','root','','pass_system');
+                mysqli_set_charset($mysql, 'utf8');
+            
                 $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается'"); 
                 // $userpass = mysqli_query($mysql, "SELECT * FROM `reg_car` WHERE `status` = 'Ожидается' AND DATE(`data_time`) = CURRENT_DATE() ORDER BY `data_time`"); 
+
+                $result = $mysql->query("SELECT * FROM `users`");
+                $user = $result->fetch_assoc();
 
                 $userpass = mysqli_fetch_all($userpass);
                 foreach ($userpass as $userpass){
@@ -48,8 +51,7 @@
                         <td style="font-size:20px;"><button type="button" class="btn btn-danger" style="font-size:18px;"><?= $userpass[6]?></button></td>
                         <td style="font-size:20px;"><?= $userpass[2]?></td>
                         <td style="font-size:20px;"><?= $userpass[3]?></td>
-                        <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
-                        <td style="font-size:20px;"><?= $userpass[4]?></td>
+                        <td style="font-size:20px;"><?= $userpass[5]?></td>
                         <td style="font-size:20px;">
                             <button type="button" class="btn btn-info"><a href="CarDecorationsec.php?id=<?=$userpass[0]?>" style="color:white; text-decoration:none; padding: 7px; font-size:18px; ">Редактировать</a></button><br>
                             <input type="submit" name="button" value = "Машина приехала" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; margin-top: 10px; font-size:18px;"><br>

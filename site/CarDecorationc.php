@@ -28,13 +28,13 @@
                 <input type="hidden" class="form-control" name="id_user" value="<?php echo $_COOKIE['id_user']; ?>">
 
                 <label for="num_car">Гос. номер авто*</label>
-                <input type="text" class="form-control"  name="num_car" id="num_car" required placeholder="А000АА"><br>
+                <input type="text" maxlength="6" class="form-control"  name="num_car" id="num_car" required placeholder="А000АА"><br>
 
-                <label for="data_time">Ожидаемая дата и время*</label>
-                <input type="datetime-local" class="form-control" name="data_time" id="data_time" required><br>
+                <label for="add_info">Дополнительная информация</label>
+                <input type="text" class="form-control" name="add_info" id="add_info" required placeholder="Марка машины"><br>
 
-                <label for="full_name">Ваше ФИО*</label>
-                <input type="text" class="form-control" name="full_name" id="full_name" required placeholder="Иванов Иван Иванович"><br>
+                <label for="data_time">Дата приезда</label>
+                <input type="datetime-local" class="form-control" name="data_time" id="data_time"  required><br>
 
                 <button class="btn btn-success" type="submit" >Создать заявку</button>
             </form>

@@ -24,8 +24,9 @@
             <tr>
                 <th style="font-size:22px;">Статус</th>
                 <th style="font-size:22px;">Автомобиль</th>
-                <th style="font-size:22px;">Адрес и заявитель</th>
-                <th style="font-size:22px;">Ожидаемая дата</th>
+                <th style="font-size:22px;">Доп информация</th>
+                <th style="font-size:22px;">Дата заезда</th>
+                <th style="font-size:22px;">Комментарий</th>
                 <th style="font-size:22px;">Действия</th>
             </tr>
         </thead>
@@ -44,9 +45,10 @@
                         <input type="hidden" class="form-control" name="id" value="<?= $userpass[0]?>">  
                         <input type="hidden" class="form-control" name="form-type" value="autopark"> 
                         <td style="font-size:20px;"><button type="button" class="btn btn-success" style="font-size:18px;"><?= $userpass[6]?></button></td>
-                        <td style="font-size:20px;"><?= $userpass[3]?><br><?= $userpass[2]?></td>
-                        <td style="font-size:20px;"><?= $userpass[5]?><br><?= $userpass[6]?><br><?= $userpass[7]?> </td>
+                        <td style="font-size:20px;"><?= $userpass[2]?></td>
+                        <td style="font-size:20px;"><?= $userpass[3]?></td>
                         <td style="font-size:20px;"><?= $userpass[4]?></td>
+                        <td style="font-size:20px;"><?= $userpass[5]?></td>
                         <td>
                             <input type="submit" name="button" value = "Завершить заявку" style="color:white; background-color: gray; border:none; padding: 7px; border-radius: 5px; font-size:18px;"><br><br>
                         </td>

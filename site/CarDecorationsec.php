@@ -39,14 +39,14 @@
             <label for="data_time">Дата приезда</label>
             <input type="datetime-local" class="form-control" name="data_time" id="data_time" value="<?= $userpass['data_time'] ?>" required><br>
 
-            <label for="address">Адрес назначения*</label>
-            <input type="text" class="form-control" name="address" id="address" value="<?= $userpass['address'] ?>" required><br>
+            <!-- <label for="address">Адрес назначения*</label>
+            <input type="text" class="form-control" name="address" id="address" value="</?= $userpass['address'] ?>" required><br> -->
 
-            <label for="full_name">Ваше ФИО</label>
-            <input type="text" class="form-control" name="full_name" id="full_name" value="<?= $userpass['full_name'] ?>" required><br>
-
+            <!-- <label for="full_name">Ваше ФИО</label>
+            <input type="text" class="form-control" name="full_name" id="full_name" value="</?= $userpass['full_name'] ?>" required><br> -->
+<!-- 
             <label for="phone_numbers">Ваш телефон</label>
-            <input type="tel" pattern="\+7\[0-9]{3}\[0-9]{3}\[0-9]{2}\[0-9]{2}" placeholder="79001234567" maxlength="11" class="form-control" name="phone_numbers" id="phone_numbers" value="<?= $userpass['phone_numbers'] ?>"  required><br>
+            <input type="tel" pattern="\+7\[0-9]{3}\[0-9]{3}\[0-9]{2}\[0-9]{2}" placeholder="79001234567" maxlength="11" class="form-control" name="phone_numbers" id="phone_numbers" value="<?= $userpass['phone_numbers'] ?>"  required><br> -->
 
             <label for="comment">Комментарий</label>
             <input type="text" class="form-control" name="comment" id="comment" value="<?= $userpass['comment'] ?>"><br>
