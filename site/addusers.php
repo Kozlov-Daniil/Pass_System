@@ -42,10 +42,12 @@
                     <tr>
                         <form action="userapproval.php" method="post">
                         <input type="hidden" class="form-control" name="id_user" value="<?=$userpass[3]?>">  
-                        <input type="hidden" class="form-control" name="form-type" value="addusers">         
+                        <input type="hidden" class="form-control" name="form-type" value="addusers">
+                        <input type="hidden" class="form-control" name="name" value="<?= $userpass[0] ?>">         
                         <td style="font-size:20px;"><?= $userpass[0]?></td>
                         <td style="font-size:20px;"><?= $userpass[1]?> </td>
                         <td style="font-size:20px;"><?= $userpass[2]?> </td>
+                        <input type="hidden" class="form-control" name="id_telegramm" value="<?= $userpass[4] ?>">
                         <td style="font-size:20px;"> <?= $userpass[4]?> </td>
                         <td>
                             <input type="submit" name="button" value = "Добавить" style="color:white; background-color: green; border:none; padding: 7px; border-radius: 5px; margin-top: 10px; font-size:18px;"><br>

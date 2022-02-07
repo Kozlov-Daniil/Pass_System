@@ -21,11 +21,6 @@
         header('Location: expectation.php');
         exit();
     }
-    elseif ($user["approved"] == 2) {
-
-        header('Location: auth.php');
-        exit();
-    }
 
     elseif ($user["approved"] == 2) {
 
@@ -41,7 +36,7 @@
         $apiToken = "2141779356:AAEancJzWsHSh0Js_62mLGTocwSEOkDJq-E";
         $data = [
              'chat_id' => $id_telegramm, 
-             'text' => "Здравствуйте, " . $user['name'] . ". Ваша регистрация подтверждена! Теперь вы можете оформлять пропуска для въезда автомобилей на территорию посёлка. Для заказа пропуска ввердите номер и марку машины"
+             'text' => "Здравствуйте, " . $user['name'] . ". Желаете оформить заявку на въезд?"
             ];
         $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?".http_build_query($data)); 
     }
