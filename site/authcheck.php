@@ -27,6 +27,16 @@
         exit();
     }
 
+    elseif ($user["approved"] == 2) {
+
+        $apiToken = "2141779356:AAEancJzWsHSh0Js_62mLGTocwSEOkDJq-E";
+        $data = [
+             'chat_id' => $id_telegramm, 
+             'text' => "Здравствуйте, " . $user['name'] . ". Ваш аккаунт находится в бане. "
+            ];
+        $response = file_get_contents("https://api.telegram.org/bot$apiToken/sendMessage?".http_build_query($data)); 
+    }
+
     else{
         $apiToken = "2141779356:AAEancJzWsHSh0Js_62mLGTocwSEOkDJq-E";
         $data = [
