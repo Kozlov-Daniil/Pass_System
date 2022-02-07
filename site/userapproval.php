@@ -34,6 +34,7 @@
         
     }
 
-    // header('Location: addusers.php');
+    
+header('Location: addusers.php');
     
 ?> 
